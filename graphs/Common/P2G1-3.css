@@ -1,0 +1,20 @@
+@import url(//db.onlinewebfonts.com/c/980f41a37f1c14ff5c0aefec5c2239e3?family=Tableau+Book);
+
+text {
+    fill: grey;
+    font-family: "Tableau Book";
+}
+
+.countries {
+    fill: none;
+    stroke: grey;
+}
+
+.legendThreshold {
+    font-size: 12px;
+}
+
+.caption {
+    text-anchor: start;
+    font-size: 14px;
+}
