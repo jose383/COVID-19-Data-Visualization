@@ -8,9 +8,11 @@ text {
 .countries {
     fill: none;
     stroke: grey;
+    stroke-width: 0.25;
+    transform: translate(4em, -11em);
 }
 
-.legendThreshold {
+.legend {
     font-size: 12px;
 }
 
@@ -18,3 +20,29 @@ text {
     text-anchor: start;
     font-size: 14px;
 }
+
+button {
+    position: absolute;
+    background: white;
+    color: grey;
+    border: 0.125em solid grey;
+    border-radius: 0;
+    cursor: pointer;
+    letter-spacing: 0.125em;
+    margin: 0.5rem;
+    padding: 0.5em 2em;
+    outline-color: #e15759;
+}
+
+button#CC {
+    transform: translate(32em, 0px);
+}
+
+button#D {
+    transform: translate(50.5em, 0px);
+}
+
+button#RC {
+    transform: translate(62em, 0px);
+}
+

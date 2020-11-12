@@ -2,14 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" http-equiv="encoding">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COVID-19 Worldmap</title>
     <link rel="stylesheet" href="../../Common/P2G1-3.css">
 </head>
 
 <body>
-    <svg id="graph" width="1500" height="900"></svg>
+    <div id="graph" width="1300" height="1000">
+        <button id="CC" onclick="change('CC')">CONFIRMED CASES</button>
+        <button id="D" onclick="change('D')">DEATHS</button>
+        <button id="RC" onclick="change('RC')">RECOVERED CASES</button>
+    </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
