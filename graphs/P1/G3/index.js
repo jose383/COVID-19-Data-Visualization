@@ -1,5 +1,5 @@
 // Set the dimensions and margins of the graph
-var margin = {
+const margin = {
         top: 75,
         right: 20,
         bottom: 100,
@@ -9,26 +9,26 @@ var margin = {
     height = 900 - margin.top - margin.bottom;
 
 // Append the svg object to the a div
-var svg = d3.select("#graph")
+let svg = d3.select("#graph")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var filteredData = [];
-var datasetWithTotal = [];
-var dataset = [];
-var subgroups = [];
-var groups = [];
+let filteredData = [];
+let datasetWithTotal = [];
+let dataset = [];
+let subgroups = [];
+let groups = [];
 
-var statesString = "";
-var date = "1/22/2020";
-var lastdate = null;
-var cases = 0;
-var casesPerDay = [];
+let statesString = "";
+let date = "1/22/2020";
+let lastdate = null;
+let cases = 0;
+let casesPerDay = [];
 
-var colors = ['#e15759', '#86bcb6', '#499894', '#f1ce63', '#b6992d', '#8cd17d', '#59a14f', '#ffbe7d', '#f28e2b', '#a0cbe8', '#4e79a7', '#d7b5a6', '#9d7660', '#d4a6c8', '#b07aa1', '#fabfd2', '#d37295', '#bab0ac', '#79706e', '#ff9d9a', '#e15759', '#86bcb6', '#499894', '#f1ce63', '#b6992d', '#8cd17d', '#59a14f', '#ffbe7d', '#f28e2b', '#a0cbe8', '#4e79a7', '#d7b5a6', '#9d7660', '#d4a6c8', '#b07aa1', '#fabfd2', '#d37295', '#bab0ac', '#79706e', '#ff9d9a', '#e15759', '#86bcb6', '#499894', '#f1ce63', '#b6992d', '#8cd17d', '#59a14f', '#ffbe7d', '#f28e2b', '#a0cbe8', '#4e79a7'];
+let colors = ['#e15759', '#86bcb6', '#499894', '#f1ce63', '#b6992d', '#8cd17d', '#59a14f', '#ffbe7d', '#f28e2b', '#a0cbe8', '#4e79a7', '#d7b5a6', '#9d7660', '#d4a6c8', '#b07aa1', '#fabfd2', '#d37295', '#bab0ac', '#79706e', '#ff9d9a', '#e15759', '#86bcb6', '#499894', '#f1ce63', '#b6992d', '#8cd17d', '#59a14f', '#ffbe7d', '#f28e2b', '#a0cbe8', '#4e79a7', '#d7b5a6', '#9d7660', '#d4a6c8', '#b07aa1', '#fabfd2', '#d37295', '#bab0ac', '#79706e', '#ff9d9a', '#e15759', '#86bcb6', '#499894', '#f1ce63', '#b6992d', '#8cd17d', '#59a14f', '#ffbe7d', '#f28e2b', '#a0cbe8', '#4e79a7'];
 
 // Parse the Data
 d3.csv("../../../data/P1/G3.csv", (data) => {
@@ -94,7 +94,7 @@ d3.csv("../../../data/P1/G3.csv", (data) => {
         .style("text-anchor", "middle")
         .attr("font-size", "17px")
         .text("Date");
-
+    
     // Y axis
     var y = d3.scaleLinear()
         // Y domain from 0 to max cases in a day round to the closest 10k

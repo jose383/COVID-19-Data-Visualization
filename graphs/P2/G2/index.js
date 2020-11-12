@@ -1,27 +1,26 @@
 // The svg
-var svg = d3.select("#graph"),
+let svg = d3.select("#graph"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
 // Map and projection
-var path = d3.geoPath();
-var projection = d3.geoNaturalEarth()
-    .scale(width / 2 / Math.PI)
+let projection = d3.geoPatterson()
+    .scale(width / 2.4 / Math.PI)
     .translate([width / 2, height / 2]);
-    
-var path = d3.geoPath()
+
+let path = d3.geoPath()
     .projection(projection);
 
 // Data and color scale
-var data = d3.map();
-var colorScheme = d3.schemeReds[6];
+let data = d3.map();
+let colorScheme = d3.schemeReds[8];
 
-var colorScale = d3.scaleThreshold()
-    .domain([1, 1000, 10000, 25000, 75000, 150000])
+let colorScale = d3.scaleThreshold()
+    .domain([1, 10000, 100000, 1000000, 2000000, 3000000, 4000000, 5000000])
     .range(colorScheme);
 
 // Legend
-var g = svg.append("g")
+let g = svg.append("g")
     .attr("class", "legendThreshold")
     .attr("transform", "translate(20,50)");
 
@@ -32,9 +31,9 @@ g.append("text")
     .text("Death Cases")
     .attr("transform", "translate(0,-10)");
 
-var labels = ['0', '1 - 9,999', '10,000 - 99,999', '100,000 - 999,999', '1M - 2.9M', '3M - 4.9M', '> 5M'];
-var legend = d3.legendColor()
-    .labels(function (d) {
+let labels = ['0', '1 - 9,999', '10,000 - 99,999', '100,000 - 999,999', '1M - 1.9M', '2M - 3.9M', '4M - 4.9M', '> 5M'];
+let legend = d3.legendColor()
+    .labels((d) => {
         return labels[d.i];
     })
     .shapePadding(4)
@@ -46,7 +45,7 @@ svg.select(".legendThreshold")
 // Load external data and boot
 d3.queue()
     .defer(d3.json, "../../Common/world.geojson")
-    .defer(d3.csv, "../../../data/Common/P2G1-3.csv", function (d) {
+    .defer(d3.csv, "../../../data/Common/P2G1-3.csv", (d) => {
         data.set(d.code, +d.Deaths);
     })
     .await(ready);
@@ -59,7 +58,7 @@ function ready(error, topo) {
         .selectAll("path")
         .data(topo.features)
         .enter().append("path")
-        .attr("fill", function (d) {
+        .attr("fill", (d) => {
             // Pull data for this country
             d.Deaths = data.get(d.id) || 0;
             // Set the color
