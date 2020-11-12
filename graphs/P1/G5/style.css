@@ -1,0 +1,44 @@
+@import url(//db.onlinewebfonts.com/c/980f41a37f1c14ff5c0aefec5c2239e3?family=Tableau+Book);
+
+text {
+    fill: grey;
+    font-family: "Tableau Book", serif;
+}
+
+.tick line,
+path.domain {
+    stroke: rgb(240, 240, 240);
+}
+
+g.tick {
+    font-size: 15px;
+}
+
+button {
+    position: absolute;
+    background: white;
+    color: grey;
+    border: 0.125em solid grey;
+    border-radius: 0;
+    cursor: pointer;
+    letter-spacing: 0.125em;
+    margin: 0.5rem;
+    padding: 0.5em 2em;
+    outline-color: #e15759;
+}
+
+button#CA {
+    transform: translate(40em, 0px);
+}
+
+button#TX {
+    transform: translate(50em, 0px);
+}
+
+button#FL {
+    transform: translate(60em, 0px);
+}
+
+button#NY {
+    transform: translate(70em, 0px);
+}

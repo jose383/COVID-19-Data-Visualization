@@ -1,0 +1,20 @@
+@import url(//db.onlinewebfonts.com/c/980f41a37f1c14ff5c0aefec5c2239e3?family=Tableau+Book);
+
+text {
+    fill: grey;
+    font-family: "Tableau Book", serif;
+}
+
+text.casesLabel,
+g.tick {
+    font-size: 13px;
+}
+
+.tick line, 
+path{
+    stroke: rgb(240, 240, 240);
+}
+
+.casesLabel {
+    fill: black;
+}

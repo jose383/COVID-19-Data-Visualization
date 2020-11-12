@@ -1,0 +1,34 @@
+body {
+    font-family: Sentinel SSm A, Sentinel SSm B, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-size: 1.2em;
+}
+
+ol {
+    list-style: none;
+    counter-reset: steps;
+    
+}
+
+ol li {
+    counter-increment: steps;
+    
+}
+
+ol li::before {
+    content: counter(steps);
+    margin: 0.5rem;
+    margin-top: 0.5em;
+    background: #000000;
+    color: white;
+    width: 1.3em;
+    height: 1.3em;
+    display: inline-grid;
+    place-items: center; 
+}
+
+a:link,
+a:active,
+a:visited,
+a:hover {
+    color: #000000;
+}
