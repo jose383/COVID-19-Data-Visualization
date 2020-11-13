@@ -1,4 +1,11 @@
-@import url(//db.onlinewebfonts.com/c/980f41a37f1c14ff5c0aefec5c2239e3?family=Tableau+Book);
+@font-face {font-family: "Tableau Book";
+    src: url("https://db.onlinewebfonts.com/t/980f41a37f1c14ff5c0aefec5c2239e3.eot");
+    src: url("https://db.onlinewebfonts.com/t/980f41a37f1c14ff5c0aefec5c2239e3.eot?#iefix") format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/980f41a37f1c14ff5c0aefec5c2239e3.woff2") format("woff2"),
+    url("https://db.onlinewebfonts.com/t/980f41a37f1c14ff5c0aefec5c2239e3.woff") format("woff"),
+    url("https://db.onlinewebfonts.com/t/980f41a37f1c14ff5c0aefec5c2239e3.ttf") format("truetype"),
+    url("https://db.onlinewebfonts.com/t/980f41a37f1c14ff5c0aefec5c2239e3.svg#Tableau Book") format("svg");
+}
 
 text {
     fill: grey;
