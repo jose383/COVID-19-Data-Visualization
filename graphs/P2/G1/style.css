@@ -33,17 +33,17 @@ button {
 }
 
 button#CC {
-    transform: translate(10em, 0px);
+    transform: translate(25vw, 0px);
     outline-color: #243f97;
 }
 
 button#D {
-    transform: translate(28.5em, 0px);
+    transform: translate(42.5vw, 0px);
     outline-color: #c74648;
 }
 
 button#RC {
-    transform: translate(40em, 0px);
+    transform: translate(55vw, 0px);
     outline-color: #0b692a;
 }
 

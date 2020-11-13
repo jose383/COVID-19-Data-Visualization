@@ -1,5 +1,5 @@
-const width = 1000,
-    height = 500;
+const width = 1500,
+    height = 600;
 
 // Confirmed Cases
 let ccsvg = d3.select("#ccgraph")
