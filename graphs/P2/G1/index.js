@@ -124,7 +124,7 @@ let dlegend = d3.legendColor()
         return dlabels[d.i];
     })
     .labelOffset(25)
-    .shapePadding(15.47)
+    .shapePadding(16)
     .scale(dcolorScale);
 
 dsvg.select(".legend")
@@ -209,7 +209,7 @@ let rlegend = d3.legendColor()
         return rlabels[d.i];
     })
     .labelOffset(25)
-    .shapePadding(15.47)
+    .shapePadding(16)
     .scale(rcolorScale);
 
 rsvg.select(".legend")
