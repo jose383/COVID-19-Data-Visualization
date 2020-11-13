@@ -1,0 +1,14 @@
+.state:hover{
+    opacity: .8;
+}
+
+.legendContainer{
+    fill: white;
+    stroke: black;
+    stroke-width: 2;
+    opacity: .3;
+}
+
+text{
+    font-family: sans-serif;
+}
