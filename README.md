@@ -2,6 +2,8 @@
 
 COVID-19 Data Visualization using D3 Library
 
+### Go to [Page](https://jose383.github.io/covid-19/)
+
 ## Getting Started
 
 1) Clone the github repository to a local folder
