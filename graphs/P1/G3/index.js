@@ -97,7 +97,6 @@ d3.csv("../../../data/P1/G3.csv", (data) => {
     
     // Y axis
     var y = d3.scaleLinear()
-        // Y domain from 0 to max cases in a day round to the closest 10k
         .domain([0, Math.round(Math.max.apply(Math, casesPerDay) / 10000) * 10000])
         .range([height, 0]);
 
