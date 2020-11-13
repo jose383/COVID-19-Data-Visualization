@@ -5,8 +5,8 @@ const margin = {
         bottom: 100,
         left: 100
     },
-    width = 1500 - margin.left - margin.right,
-    height = 900 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 // Append the svg object to the a div
 let svg = d3.select("#graph")
@@ -17,6 +17,7 @@ let svg = d3.select("#graph")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 let change;
+let mousemove;
 
 // Parse the Data
 d3.csv("../../../data/P1/G5.csv", (data) => {
@@ -49,7 +50,7 @@ d3.csv("../../../data/P1/G5.csv", (data) => {
         .style("text-anchor", "middle")
         .attr("font-size", "17px")
         .text("Date");
-        
+
     let widths = [30, 6.15, 3.3, 2.3, 1.76, 1.42, 1.185, 1.03];
     let months = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
 
@@ -81,8 +82,7 @@ d3.csv("../../../data/P1/G5.csv", (data) => {
         .text("Confirmed Cases");
 
     // CA linechart
-    let line = svg
-        .append('g')
+    let line = svg.append("g")
         .append("path")
         .datum(data.filter((d) => {
             return d.State === states[0];
@@ -100,6 +100,27 @@ d3.csv("../../../data/P1/G5.csv", (data) => {
         })
         .style("stroke-width", 1.5)
         .style("fill", "none");
+
+    // Create dots per entry
+    svg.selectAll(".dot")
+        .data(data.filter((d) => {
+            return d.State === states[0];
+        }))
+        .enter().append("circle")
+        .attr("class", "dotCA")
+        .attr("style", "display:block;")
+        .attr("cx", function (d, i) {
+            return x(new Date(d.Date))
+        })
+        .attr("cy", function (d) {
+            return y(+d.ConfirmedCases)
+        })
+        .attr("r", 9)
+        .attr("opacity", 0)
+        .append("title")
+        .text((d) => {
+            return (d.State + " " + d.Date + ": " + d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+        })
 
     // Function to update the linechart
     change = (stateSelection) => {
@@ -122,6 +143,90 @@ d3.csv("../../../data/P1/G5.csv", (data) => {
             )
             .attr("stroke", () => {
                 return '#e15759'
-            });
+            })
+
+        // Create dots per entry
+        svg.selectAll(".dot")
+            .data(data.filter((d) => {
+                return d.State === stateSelection;
+            }))
+            .enter().append("circle")
+            .attr("class", "dot" + stateSelection)
+            .attr("cx", function (d, i) {
+                return x(new Date(d.Date))
+            })
+            .attr("cy", function (d) {
+                return y(+d.ConfirmedCases)
+            })
+            .attr("r", 9)
+            .attr("opacity", 0)
+            .append("title")
+            .text((d) => {
+                return (d.State + " " + d.Date + ": " + d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            })
+
+        // get dots by class
+        var ca = document.getElementsByClassName("dotCA");
+        var tx = document.getElementsByClassName("dotTX");
+        var fl = document.getElementsByClassName("dotFL");
+        var ny = document.getElementsByClassName("dotNY");
+
+        // Display only selected state
+        if (stateSelection === 'CA') {
+            for (var i = 0; i < ca.length; i++) {
+                ca[i].style.display = "block";
+            }
+            for (var i = 0; i < tx.length; i++) {
+                tx[i].style.display = "none";
+            }
+            for (var i = 0; i < fl.length; i++) {
+                fl[i].style.display = "none";
+            }
+            for (var i = 0; i < ny.length; i++) {
+                ny[i].style.display = "none";
+            }
+        }
+        if (stateSelection === 'TX') {
+            for (var i = 0; i < ca.length; i++) {
+                ca[i].style.display = "none";
+            }
+            for (var i = 0; i < tx.length; i++) {
+                tx[i].style.display = "block";
+            }
+            for (var i = 0; i < fl.length; i++) {
+                fl[i].style.display = "none";
+            }
+            for (var i = 0; i < ny.length; i++) {
+                ny[i].style.display = "none";
+            }
+        }
+        if (stateSelection === 'FL') {
+            for (var i = 0; i < ca.length; i++) {
+                ca[i].style.display = "none";
+            }
+            for (var i = 0; i < tx.length; i++) {
+                tx[i].style.display = "none";
+            }
+            for (var i = 0; i < fl.length; i++) {
+                fl[i].style.display = "block";
+            }
+            for (var i = 0; i < ny.length; i++) {
+                ny[i].style.display = "none";
+            }
+        }
+        if (stateSelection === 'NY') {
+            for (var i = 0; i < ca.length; i++) {
+                ca[i].style.display = "none";
+            }
+            for (var i = 0; i < tx.length; i++) {
+                tx[i].style.display = "none";
+            }
+            for (var i = 0; i < fl.length; i++) {
+                fl[i].style.display = "none";
+            }
+            for (var i = 0; i < ny.length; i++) {
+                ny[i].style.display = "block";
+            }
+        }
     }
 });

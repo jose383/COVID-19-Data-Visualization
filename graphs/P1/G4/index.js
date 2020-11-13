@@ -5,8 +5,8 @@ const margin = {
         bottom: 90,
         left: 100
     },
-    width = 1500 - margin.left - margin.right,
-    height = 1100 - margin.top - margin.bottom;
+    width = window.innerWidth - margin.left - margin.right - 10,
+    height =  window.innerHeight - margin.top - margin.bottom - 20;
 
 // Append the svg object to the a div
 let svg = d3.select("#graph")
@@ -66,7 +66,7 @@ d3.csv("../../../data/P1/G4.csv").then((data) => {
         .attr("width", (d) => {
             return x(d.Cases);
         })
-        .attr("height", y.bandwidth() + 2)
+        .attr("height", y.bandwidth())
         .attr("fill", "#e15759");
 
     // Add bar labels

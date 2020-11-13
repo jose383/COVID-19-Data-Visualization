@@ -1,12 +1,12 @@
 // Set the dimensions and margins of the graph
 const margin = {
-        top: 75,
+        top: 50,
         right: 20,
         bottom: 100,
         left: 100
     },
-    width = 7000 - margin.left - margin.right,
-    height = 900 - margin.top - margin.bottom;
+    width = 5000 - margin.left - margin.right,
+    height = window.innerHeight - margin.top - margin.bottom;
 
 // Append the svg object to the a div
 let svg = d3.select("#graph")
@@ -90,11 +90,11 @@ d3.csv("../../../data/P1/G3.csv", (data) => {
         .style("text-anchor", "end");
 
     svg.append("text")
-        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 10) + ")")
+        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
         .style("text-anchor", "middle")
         .attr("font-size", "17px")
         .text("Date");
-    
+
     // Y axis
     var y = d3.scaleLinear()
         .domain([0, Math.round(Math.max.apply(Math, casesPerDay) / 10000) * 10000])
@@ -146,7 +146,11 @@ d3.csv("../../../data/P1/G3.csv", (data) => {
         .attr("height", (d) => {
             return y(d[0]) - y(d[1]);
         })
-        .attr("width", x.bandwidth() - 5);
+        .attr("width", x.bandwidth())
+        .append("title")
+        .text((d) => {
+            return (d.data.Date + ": " + d.data.TotalCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+        });
 
     // Legend
     var legend = svg.selectAll(".legend")

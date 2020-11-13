@@ -1,0 +1,192 @@
+Country,ControlEfficiency,Group
+CE,,
+Eritrea,306000,CE
+Mongolia,298000,CE
+Cambodia,273000,CE
+Bhutan,155000,CE
+Seychelles,132000,CE
+Saint Vincent and the Grenadines,58000,CE
+Macau,46000,CE
+Saint Lucia,26000,CE
+Timor-Leste,26000,CE
+Grenada,24000,CE
+Laos,22000,CE
+Dominica,19000,CE
+Saint Kitts and Nevis,17000,CE
+Holy See,12000,CE
+Singapore,1997.037037,CE
+Qatar,588.2435233,CE
+Burundi,336,CE
+Bahrain,249.1202186,CE
+Sri Lanka,233.1666667,CE
+Iceland,193.6,CE
+Rwanda,159.4545455,CE
+Ghana,158.651341,CE
+Maldives,158.1923077,CE
+United Arab Emirates,157.0107527,CE
+Guinea,144.3018868,CE
+Kuwait,139.9025341,CE
+Ivory Coast,133.6814159,CE
+Uzbekistan,129.4981273,CE
+Oman,128.7126437,CE
+Gabon,127.0566038,CE
+Nepal,125.6849315,CE
+Jordan,115.2727273,CE
+Belarus,107.6562009,CE
+Tajikistan,107.1515152,CE
+Israel,96.03296703,CE
+Malta,90.1,CE
+West Bank and Gaza,88.824,CE
+Venezuela,88.08978328,CE
+Liechtenstein,88,CE
+Djibouti,87.21666667,CE
+Saudi Arabia,76.93865709,CE
+Madagascar,74.8988764,CE
+Mozambique,73.7,CE
+Malaysia,71.592,CE
+New Zealand,69.90909091,CE
+Cabo Verde,68.59459459,CE
+Georgia,66.58823529,CE
+Taiwan,65.28571429,CE
+Slovakia,65.06060606,CE
+Kazakhstan,64.37385159,CE
+Azerbaijan,63.77087379,CE
+Uganda,59.95,CE
+Comoros,56.57142857,CE
+Burma,56.33333333,CE
+Luxembourg,56.2016129,CE
+Thailand,55.51724138,CE
+Sao Tome and Principe,55.4,CE
+Namibia,53.47826087,CE
+Hong Kong,51.61038961,CE
+Diamond Princess,50.07692308,CE
+Papua New Guinea,49.5,CE
+Jamaica,49.25,CE
+Russia,47.07118269,CE
+Brunei,46.33333333,CE
+South Korea,45.95469256,CE
+Equatorial Guinea,45.72289157,CE
+Botswana,45.33333333,CE
+Bangladesh,44.93652419,CE
+Suriname,44.89473684,CE
+Pakistan,44.18504253,CE
+Cyprus,43.9,CE
+Benin,43.71794872,CE
+Armenia,42.24352941,CE
+Morocco,40.83916084,CE
+Cameroon,40.53921569,CE
+Japan,40.21882952,CE
+India,40.21736677,CE
+Montenegro,39.67857143,CE
+Mauritania,39.25949367,CE
+Czech Republic,39.14111922,CE
+Nigeria,38.88365095,CE
+South Africa,38.81781782,CE
+Philippines,38.74612272,CE
+Turkey,38.73647984,CE
+Dominican Republic,38.57722008,CE
+Paraguay,37.484375,CE
+Australia,37.36653386,CE
+Argentina,35.89091706,CE
+Zambia,35.6344086,CE
+Congo (Kinshasa),35.53784861,CE
+Norway,34.65909091,CE
+Chile,34.25963677,CE
+Kyrgyzstan,34.17630332,CE
+Kenya,34.04612546,CE
+Cuba,33.7752809,CE
+Togo,33.44444444,CE
+Croatia,33.4,CE
+Mauritius,33.4,CE
+Eswatini,33.27710843,CE
+Latvia,33.12121212,CE
+Panama,32.23003195,CE
+Estonia,32.12698413,CE
+Guinea-Bissau,30.75757576,CE
+Senegal,30.69548872,CE
+Zimbabwe,30.25490196,CE
+Uruguay,30.0952381,CE
+Costa Rica,29.8045977,CE
+Antigua and Barbuda,29.66666667,CE
+Austria,29.2431694,CE
+Monaco,29,CE
+Central African Republic,28.7704918,CE
+Haiti,27.79081633,CE
+Lebanon,27.65289256,CE
+South Sudan,27.44680851,CE
+Somalia,25.76344086,CE
+Brazil,25.50517287,CE
+Moldova,24.25989305,CE
+Ukraine,23.38495188,CE
+Fiji,23,CE
+Denmark,22.92282958,CE
+Portugal,22.6599777,CE
+Iraq,22.57091138,CE
+Sierra Leone,22.39130435,CE
+Germany,22.39063848,CE
+Nicaragua,21.90225564,CE
+Ethiopia,21.87311178,CE
+Guatemala,21.8127907,CE
+Vietnam,21.65384615,CE
+Poland,21.35366479,CE
+Bosnia and Herzegovina,21.29511278,CE
+Finland,21.25748503,CE
+Congo (Brazzaville),21.1038961,CE
+Tunisia,21.08823529,CE
+Colombia,21.0610816,CE
+Lithuania,21.02380952,CE
+Algeria,20.27668539,CE
+Afghanistan,20.22815884,CE
+Bulgaria,19.07606679,CE
+Burkina Faso,18.8,CE
+El Salvador,18.38073394,CE
+Kosovo,18.18973214,CE
+Barbados,18,CE
+North Macedonia,17.85435169,CE
+Malawi,17.8452381,CE
+Mainland China,17.24298662,CE
+Albania,17.07755102,CE
+Switzerland,17.05,CE
+Andorra,16.50943396,CE
+Mali,16.08,CE
+Indonesia,15.95359418,CE
+Slovenia,15.87022901,CE
+Lesotho,15.73333333,CE
+Niger,15.69565217,CE
+San Marino,15.64285714,CE
+Iran,15.00838943,CE
+Ecuador,14.00175243,CE
+Peru,13.97430721,CE
+Guyana,13.96774194,CE
+Ireland,13.14800225,CE
+Trinidad and Tobago,12.69230769,CE
+Egypt,12.41998856,CE
+Canada,12.3528573,CE
+Chad,11.43421053,CE
+US,11.25857797,CE
+Romania,10.85029384,CE
+Liberia,9.951219512,CE
+Bolivia,9.880009005,CE
+Tanzania,8.714285714,CE
+Angola,8.659574468,CE
+Bahamas,8.185185185,CE
+Western Sahara,8,CE
+Sudan,7.965644172,CE
+Mexico,7.519899094,CE
+Belize,7.333333333,CE
+Hungary,6.042553191,CE
+Italy,5.791786622,CE
+Libya,5.771276596,CE
+Syria,5.764705882,CE
+Greece,5.6125,CE
+Gambia,5.416666667,CE
+Spain,5.214508634,CE
+Honduras,5.142422398,CE
+France,2.788675165,CE
+Yemen,1.952380952,CE
+Belgium,1.822587105,CE
+Netherlands,0.101686747,CE
+UK,0.037269026,CE
+MS Zaandam,0,CE
+Serbia,0,CE
+Sweden,0,CE

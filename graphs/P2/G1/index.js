@@ -17,7 +17,7 @@ let ccpath = d3.geoPath()
     .projection(ccprojection);
 
 let ccdata = d3.map();
-let cccolorScheme = d3.schemeReds[8];
+let cccolorScheme = d3.schemeBlues[8];
 
 let cccolorScale = d3.scaleThreshold()
     .domain([1, 10000, 100000, 1000000, 2000000, 3000000, 4000000, 5000000])
@@ -32,7 +32,7 @@ ccg.append("text")
     .attr("x", 0)
     .attr("y", 0)
     .text("Confirmed Cases")
-    .attr("transform", "translate(0, -5)");
+    .attr("transform", "translate(0, -15)");
 
 let cclabels = ['1 - 9,999', '10,000 - 99,999', '100,000 - 499,999', '500,000 - 999,999', '1M - 1.9M', '2M - 3.9M', '4M - 4.9M', '> 5M'];
 let cclegend = d3.legendColor()
@@ -47,7 +47,7 @@ ccsvg.select(".legend")
 
 d3.queue()
     .defer(d3.json, "../../Common/world.geojson")
-    .defer(d3.csv, "../../../data/Common/P2G1-3.csv", (d) => {
+    .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
         ccdata.set(d.code, +d.Confirmed);
     })
     .await(ccready);
@@ -116,7 +116,7 @@ dg.append("text")
     .attr("x", 0)
     .attr("y", 0)
     .text("Deaths")
-    .attr("transform", "translate(0, -5)");
+    .attr("transform", "translate(0, -15)");
 
 let dlabels = ['1 - 999', '1,000 - 9,999', '10,000 - 49,999', '50,000 - 74,999', '75,000 - 99,999', '100,000 - 124,999', '125,000 - 149,999', '> 150,000'];
 let dlegend = d3.legendColor()
@@ -132,7 +132,7 @@ dsvg.select(".legend")
 
 d3.queue()
     .defer(d3.json, "../../Common/world.geojson")
-    .defer(d3.csv, "../../../data/Common/P2G1-3.csv", (d) => {
+    .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
         ddata.set(d.code, +d.Deaths);
     })
     .await(dready);
@@ -201,7 +201,7 @@ rg.append("text")
     .attr("x", 0)
     .attr("y", 0)
     .text("Recovered")
-    .attr("transform", "translate(0, -5)");
+    .attr("transform", "translate(0, -15)");
 
 let rlabels = ['1 - 9,999', '10,000 - 99,999', '100,000 - 499,999', '500,000 - 999,999', '1M - 1.49M', '1.5M - 1.99M', '2M - 2.49M', '> 2.5M'];
 let rlegend = d3.legendColor()
@@ -217,7 +217,7 @@ rsvg.select(".legend")
 
 d3.queue()
     .defer(d3.json, "../../Common/world.geojson")
-    .defer(d3.csv, "../../../data/Common/P2G1-3.csv", (d) => {
+    .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
         rdata.set(d.code, +d.Recovered);
     })
     .await(rready);
@@ -257,7 +257,7 @@ function rready(error, topo) {
 
 var list = document.getElementsByClassName("label");
 for (var i = 8; i < list.length; i++) {
-    list[i].style.transform = "translate(25px,12.5px)"
+    list[i].style.transform = "translate(25px,12.5px)";
 }
 
 let change = (selection) => {

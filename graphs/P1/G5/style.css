@@ -9,7 +9,7 @@ path.domain {
 }
 
 g.tick {
-    font-size: 15px;
+    font-size: 12px;
 }
 
 button {
@@ -26,17 +26,17 @@ button {
 }
 
 button#CA {
-    transform: translate(40em, 0px);
+    transform: translate(22em, 0px);
 }
 
 button#TX {
-    transform: translate(50em, 0px);
+    transform: translate(32em, 0px);
 }
 
 button#FL {
-    transform: translate(60em, 0px);
+    transform: translate(42em, 0px);
 }
 
 button#NY {
-    transform: translate(70em, 0px);
+    transform: translate(52em, 0px);
 }
