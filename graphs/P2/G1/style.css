@@ -1,8 +1,6 @@
-@import url(//db.onlinewebfonts.com/c/980f41a37f1c14ff5c0aefec5c2239e3?family=Tableau+Book);
-
 text {
     fill: grey;
-    font-family: "Tableau Book";
+    font-family: Sentinel SSm A, Sentinel SSm B, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 
 .countries {
@@ -35,14 +33,14 @@ button {
 }
 
 button#CC {
-    transform: translate(32em, 0px);
+    transform: translate(10em, 0px);
 }
 
 button#D {
-    transform: translate(50.5em, 0px);
+    transform: translate(28.5em, 0px);
 }
 
 button#RC {
-    transform: translate(62em, 0px);
+    transform: translate(40em, 0px);
 }
 

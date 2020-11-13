@@ -80,7 +80,7 @@ d3.csv("../../../data/P1/G5.csv", (data) => {
         .attr("font-size", "17px")
         .text("Confirmed Cases");
 
-    // California linechart
+    // CA linechart
     let line = svg
         .append('g')
         .append("path")
