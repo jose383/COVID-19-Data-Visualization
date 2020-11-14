@@ -200,7 +200,7 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(data => 
     console.log(states);
 });
 
-d3.csv('../Data/4_Highest_States.csv').then(data => {
+d3.csv('../../../data/P1/G2.csv').then(data => {
     data.forEach(d => {
         d.ConfirmedCases = +d.ConfirmedCases;
         if(!highest.includes(d.State))
