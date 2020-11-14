@@ -174,7 +174,7 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(data => 
     console.log(data);
 });
 
-d3.csv('../Data/US_map.csv').then(data => {
+d3.csv('../../../data/P1/G1.csv').then(data => {
     data.forEach(d => {
         d.ConfirmedCases = +d.ConfirmedCases;
     });
