@@ -1,5 +1,5 @@
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = 1500;
+const height = 700;
 const font_size = 60;
 
 const svg = d3.select('svg')
@@ -8,8 +8,8 @@ const svg = d3.select('svg')
 const g = svg.append('g');
 
 const legendContainerSettings = {
-    x: width * 0.03,
-    y: height * 0.02,
+    x: width / 2.6,
+    y: 475,
     width: 440,
     height: 60,
     roundX: 10,
@@ -34,7 +34,7 @@ const render = data => {
 
     const legendData = [147110, 294220, 441330, 588440, 735550];
 
-    const projection = d3.geoAlbersUsa().fitSize([width, height], states);
+    const projection = d3.geoAlbersUsa().fitSize([width, height - 250], states);
     const path = d3.geoPath().projection(projection);
 
     const colorScale = d3.scaleLinear().domain([min, max])
@@ -140,7 +140,7 @@ const render = data => {
 
     const legendContainer = svg.append('rect')
         .attr('x', legendContainerSettings.x)
-        .attr('y', legendContainerSettings.y + 550)
+        .attr('y', legendContainerSettings.y)
         .attr('rx', legendContainerSettings.roundX)
         .attr('ry', legendContainerSettings.roundY)
         .attr('width', legendContainerSettings.width)
@@ -154,7 +154,7 @@ const render = data => {
 
     legend.append('rect')
         .attr('x', (d,i) => legendContainerSettings.x + legendBoxSetting.width * i + 20)
-        .attr('y', legendBoxSetting.y + 525)
+        .attr('y', legendBoxSetting.y - 15)
         .attr('width', legendBoxSetting.width)
         .attr('height', legendBoxSetting.height)
         .style('fill', d => colorScale(d))
@@ -164,9 +164,15 @@ const render = data => {
         .data(legendData)
         .enter().append('text')
         .attr('x', (d, i) => legendContainerSettings.x + legendBoxSetting.width * i + 30)
-        .attr('y', legendContainerSettings.y + 570)
+        .attr('y', legendContainerSettings.y + 35)
         .style('font-size', '70%')
         .text(d => '<= ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+    legend.append('text')
+        .attr('x', legendContainerSettings.x + 140)
+        .attr('y', legendContainerSettings.y + 15)
+        .style('font-size', '.8em')
+        .text('Confirmed Cases Density');
 };
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(data => {

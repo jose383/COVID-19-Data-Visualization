@@ -2,7 +2,7 @@
     fill: white;
     stroke: black;
     stroke-width: 2;
-    opacity: .3;
+    opacity: .5;
 }
 
 text{
@@ -10,7 +10,14 @@ text{
 }
 
 .bubble{
-    fill-opacity: .7;
+    fill-opacity: .4;
     stroke: #fff;
-    stroke-width: .3px;
+    stroke-width: .1px;
+}
+
+button{
+    background-color: white;
+    outline-color: red;
+    padding: .5em;
+    transform: translate(625px, 0px);
 }
