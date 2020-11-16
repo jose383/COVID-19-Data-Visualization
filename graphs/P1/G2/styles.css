@@ -1,0 +1,23 @@
+.legendContainer{
+    fill: white;
+    stroke: black;
+    stroke-width: 2;
+    opacity: .5;
+}
+
+text{
+    font-family: sans-serif;
+}
+
+.bubble{
+    fill-opacity: .4;
+    stroke: #fff;
+    stroke-width: .1px;
+}
+
+button{
+    background-color: white;
+    outline-color: red;
+    padding: .5em;
+    transform: translate(625px, 0px);
+}
