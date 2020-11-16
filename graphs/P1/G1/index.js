@@ -103,7 +103,7 @@ const render = data => {
     svg.call(d3.zoom().on('zoom', ({transform}) => {
         g.attr('transform', transform);
 
-        if(transform.k > 0.8 && transform.k < 6){
+        if(transform.k > 0.8){
             g.selectAll('text')
                 .attr('font-size', (font_size/transform.k) + '%')
                 .text(d => {
