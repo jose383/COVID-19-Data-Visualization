@@ -1,241 +1,173 @@
-d3 = d3;
+// The svg
 
-const state = {
-    data: [],
-    passengerClass: "",
-    selectedSex: null,
-    selectedSurvived: null
-};
+const render1 = data =>{
+    
+var svg = d3.select("#graph1")
+const width = +svg.attr('width');
+const height = +svg.attr('height');
+    const xValue = d => d.AgeGroup;
+    const yValue = d => d.Records;
+    const margin = {top: 20, right:20, bottom:40, left: 50};
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
 
+    let colors = d3.schemeCategory20c;
+    
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, yValue)])
+        .range([innerHeight, 0]);
+        
+    const xScale = d3.scaleBand()
+        .domain(data.map(xValue))
+        .range([0,innerWidth])
+        .padding(0.1);
 
+        
+    const xAxis = svg.append('g')
+        .classed("xAxis", true)
+        .attr('transform', 'translate('+ margin.left + "," + (innerHeight + margin.top) + ")")
+        .call(d3.axisBottom(xScale));
+    
+    const yAxis = svg.append("g")
+        .classed("yAxis",true)
+        .attr('transform', `translate(${margin.left}, ${margin.top})`)
+        .call(d3.axisLeft(yScale));
+    
+    svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Number Of Records");
+    
+    svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height- 6)
+        .text("Age Group");  
 
-function createHistogram(svgSelector) {
-    const margin = {
-        top: 40,
-        bottom: 10,
-        left: 120,
-        right: 20
-    };
-    const width = 600 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    let grid = svg.append('g')
+        .attr("class", "grid")
+        .attr('transform', 'translate('+ margin.left + ',' + margin.top + ')')
+        .call(d3.axisLeft(yScale)
+        .tickSize(-(innerWidth))
+        .tickFormat(""))
 
-    // Creates sources <svg> element
-    const svg = d3.select(svgSelector)
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom);
-
-    // Group used to enforce margin
-    const g = svg.append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
-
-
-    // Scales setup
-    const xscale = d3.scaleLinear().range([0, width]);
-    const yscale = d3.scaleLinear().range([0, height]);
-
-    // Axis setup
-    const xaxis = d3.axisTop().scale(xscale);
-    const g_xaxis = g.append('g').attr('class', 'x axis');
-    const yaxis = d3.axisLeft().scale(yscale);
-    const g_yaxis = g.append('g').attr('class', 'y axis');
-
-
-    function update(new_data) {
-        //: (IPerson[] & {x0: number, x1: number})[]
-        //update the scales
-        xscale.domain([0, d3.max(new_data, (d) => d.length)]);
-        yscale.domain([new_data[0].x0, new_data[new_data.length - 1].x1]);
-        //render the axis
-        g_xaxis.transition().call(xaxis);
-        g_yaxis.transition().call(yaxis);
-
-
-        // Render the chart with new data
-
-        // DATA JOIN
-        const rect = g.selectAll('rect').data(new_data).join(
-            (enter) => {
-                // ENTER
-                // new elements
-                const rect_enter = enter.append('rect')
-                    .attr('x', 0) //set intelligent default values for animation
-                    .attr('y', 0)
-                    .attr('width', 0)
-                    .attr('height', 0);
-                rect_enter.append('title');
-                return rect_enter;
-            },
-            // UPDATE
-            // update existing elements
-            (update) => update,
-            // EXIT
-            // elements that aren't associated with data
-            (exit) => exit.remove()
-        );
-
-        // ENTER + UPDATE
-        // both old and new elements
-        rect.transition()
-            .attr('height', (d) => yscale(d.x1) - yscale(d.x0) - 2)
-            .attr('width', (d) => xscale(d.length))
-            .attr('y', (d) => yscale(d.x0) + 1);
-
-        rect.select('title').text((d) => `${d.x0}: ${d.length}`);
-    }
-
-    return update;
+    let rect = svg.append("g").attr('transform', 'translate('+ margin.left + "," + margin.top + ")")
+    
+    rect.selectAll("rect").data(data).enter()
+    .append("rect")
+    .attr("width", xScale.bandwidth())
+    .attr("height", function(d){
+        return innerHeight - yScale(d.Records)
+    })
+    .attr('x', function(d){
+        return xScale(d.AgeGroup);
+    })
+    .attr('y', function(d){
+        return yScale(d.Records);
+    })
+    .attr("fill", function(d,i){
+        return colors[i]
+    })
+    
 }
+const render2 = data =>{
+    var svg = d3.select("#graph2")
+    const width = +svg.attr('width');
+    const height = +svg.attr('height');
+    const xValue = d => d.Outcome;
+    const yValue = d => d.AvgAge;
+    const margin = {top: 20, right:20, bottom:40, left: 40};
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
 
-function createPieChart(svgSelector, stateAttr, colorScheme) {
-    const margin = 10;
-    const radius = 100;
+    let colors = d3.schemeCategory20c;
+    
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, yValue)])
+        .range([innerHeight, 0]);
+        
+    const xScale = d3.scaleBand()
+        .domain(data.map(xValue))
+        .range([0,innerWidth])
+        .padding(0.1);
 
-    // Creates sources <svg> element
-    const svg = d3.select(svgSelector)
-        .attr('width', radius * 2 + margin * 2)
-        .attr('height', radius * 2 + margin * 2);
+        
+    const xAxis = svg.append('g')
+        .classed("xAxis", true)
+        .attr('transform', 'translate('+ margin.left + "," + (innerHeight + margin.top) + ")")
+        .call(d3.axisBottom(xScale));
 
-    // Group used to enforce margin
-    const g = svg.append('g')
-        .attr('transform', `translate(${radius + margin},${radius + margin})`);
+    const yAxis = svg.append("g")
+        .classed("yAxis",true)
+        .attr('transform', `translate(${margin.left}, ${margin.top})`)
+        .call(d3.axisLeft(yScale));
 
-    const pie = d3.pie().value((d) => d.values.length).sortValues(null).sort(null);
-    const arc = d3.arc().outerRadius(radius).innerRadius(0);
-    const noSlice = [
-        {startAngle: 0, endAngle: Math.PI * 2, padAngle: 0},
-        {startAngle: 0, endAngle: 0, padAngle: 0}
-    ];
+    svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 5)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Average Age");
+    
+    svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height - 6)
+        .text("Outcomes");     
 
-    const cscale = d3.scaleOrdinal(colorScheme);
+    let grid = svg.append('g')
+        .attr("class", "grid")
+        .attr('transform', 'translate('+ margin.left + ',' + margin.top + ')')
+        .call(d3.axisLeft(yScale)
+        .tickSize(-(innerWidth))
+        .tickFormat(""))
 
-    function update(new_data) { //{key: string, values: IPerson[]}[]
-        const pied = pie(new_data);
-        // Render the chart with new data
+    let rect = svg.append("g").attr('transform', 'translate('+ margin.left + "," + margin.top + ")")
+    
+    rect.selectAll("rect").data(data).enter()
+    .append("rect")
+    .attr("width", xScale.bandwidth())
+    .attr("height", function(d){
+        return innerHeight - yScale(d.AvgAge)
+    })
+    .attr('x', function(d){
+        return xScale(d.Outcome);
+    })
+    .attr('y', function(d){
+        return yScale(d.AvgAge);
+    })
+    .attr("fill", function(d,i){
+        return colors[i]
+    })
 
-        cscale.domain(new_data.map((d) => d.key));
-
-        // DATA JOIN
-        const old = g.selectAll('path').data();
-
-        function tweenArc(d, i) {
-            const interpolate = d3.interpolateObject(old[i], d);
-            return (t) => arc(interpolate(t));
-        }
-
-        // DATA JOIN
-        const path = g.selectAll('path').data(pied, (d) => d.data.key).join(
-            // ENTER
-            // new elements
-            (enter) => {
-                const path_enter = enter.append('path')
-                    .attr('d', (d, i) => arc(noSlice[i]))
-                    .on('click', (event, d) => {
-                        if (state[stateAttr] === d.data.key) {
-                            state[stateAttr] = null;
-                        } else {
-                            state[stateAttr] = d.data.key;
-                        }
-                        updateApp();
-                    });
-                path_enter.append('title');
-                return path_enter;
-            },
-            (update) => update,
-            (exit) => exit.transition()
-                .attrTween('d', tweenArc)
-                .remove()
-        );
-
-        // ENTER + UPDATE
-        // both old and new elements
-        path
-            .classed('selected', (d) => d.data.key === state.selectedSex)
-            .transition()
-            .attrTween('d', tweenArc)
-            .style('fill', (d) => cscale(d.data.key));
-
-        path.select('title').text((d) => `${d.data.key}: ${d.data.values.length}`);
-    }
-    return update;
+  
 }
+    let dataSet = []
+d3.csv("G2.csv", (data) => {
+  data.forEach(d =>{
+      dataSet.push({
+        "AgeGroup": d.AgeGroup,
+        "Records": +d.NumberofRecords
+                });
+  })
 
-/////////////////////////
-
-const ageHistogram = createHistogram('#age');
-const sexPieChart = createPieChart('#sex', 'selectedSex', d3.schemeSet3);
-const fareHistogram = createHistogram('#fare');
-const survivedPieChart = createPieChart('#survived', 'selectedSurvived', d3.schemeSet3.slice(2));
-
-function filterData() {
-    return state.data.filter((d) => {
-        if (state.passengerClass && d.pclass !== state.passengerClass) {
-            return false;
-        }
-        if (state.selectedSex && d.sex !== state.selectedSex) {
-            return false;
-        }
-        if (state.selectedSurvived && d.survived !== state.selectedSurvived) {
-            return false;
-        }
-        return true;
-    });
-}
-
-function wrangleData(filtered) {
-    const ageHistogram = d3.bin()
-        .domain([0, 100])
-        .thresholds(10)
-        .value((d) => d.age);
-
-    const ageHistogramData = ageHistogram(filtered);
-
-    // always the two categories
-    const sexPieData = ['female', 'male'].map((key) => ({
-        key,
-        values: filtered.filter((d) => d.sex === key)
-    }));
-
-    const fareHistogram = d3.bin()
-        .domain([0, d3.max(filtered, (d) => d.fare)])
-        .value((d) => d.fare);
-
-    const fareHistogramData = fareHistogram(filtered);
-
-    // always the two categories
-    const survivedPieData = ['0', '1'].map((key) => ({
-        key,
-        values: filtered.filter((d) => d.survived === key)
-    }));
-
-    return {ageHistogramData, sexPieData, fareHistogramData, survivedPieData};
-}
-
-function updateApp() {
-    const filtered = filterData();
-
-    const {ageHistogramData, sexPieData, fareHistogramData, survivedPieData} = wrangleData(filtered);
-    ageHistogram(ageHistogramData);
-    sexPieChart(sexPieData);
-    fareHistogram(fareHistogramData);
-    survivedPieChart(survivedPieData);
-
-    d3.select('#selectedSex').text(state.selectedSex || 'None');
-    d3.select('#selectedSurvived').text(state.selectedSurvived || 'None');
-}
-
-d3.csv('https://rawgit.com/sgratzl/d3tutorial/master/examples/titanic3.csv').then((parsed) => {
-    state.data = parsed.map((row) => {
-        row.age = parseInt(row.age, 10);
-        row.fare = parseFloat(row.fare);
-        return row;
-    });
-
-    updateApp();
-});
-
-//interactivity
-d3.select('#passenger-class').on('change', function () {
-    const selected = d3.select(this).property('value');
-    state.passengerClass = selected;
-    updateApp();
-});
+console.log(dataSet);
+render1(dataSet);
+})
+let outcomeData = []
+d3.csv("G3.csv", (data) =>{
+    data.forEach(d =>{
+        outcomeData.push({
+            "Outcome" :d.Outcome,
+            "AvgAge" :d.AvgAge 
+        })
+    })
+    console.log(outcomeData);
+    render2(outcomeData);
+})
