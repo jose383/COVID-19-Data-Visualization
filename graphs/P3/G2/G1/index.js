@@ -1,4 +1,4 @@
-const width = 1300;
+const width = 1520;
 const height = 700;
 const font_size = 60;
 
