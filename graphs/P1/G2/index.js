@@ -2,10 +2,17 @@ const width = 1500;
 const height = 700;
 const font_size = 60;
 
+const legendDataC = [41257, 82514, 123771, 165028, 247542];
+const legendDataP = [10000, 50000, 250000, 1250000, 6250000];
+
 const svg = d3.select('svg')
     .attr('width', width)
     .attr('height', height)
 const g = svg.append('g');
+const legend = svg.selectAll('g.legend')
+        .data(legendDataC)
+        .enter().append('g')
+        .attr('class', 'legend');
 
 const legendContainerSettings = {
     x: width / 2.6,
@@ -95,6 +102,19 @@ const getRadius = data => {
     }
 }
 
+const getLegendTitle = () => {
+    legend.append('text')
+        .attr('x', legendContainerSettings.x + 150)
+        .attr('y', legendContainerSettings.y + 15)
+        .style('font-size', '.8em')
+        .text(() => {
+            if(option == 'ConfirmedCases') 
+                return 'Confirmed Cases Density';
+            else 
+                return 'Population Density';
+        });
+}
+
 const render = data => {
     const projection = d3.geoAlbersUsa().fitSize([width, height - 250], states);
     const path = d3.geoPath().projection(projection);
@@ -106,9 +126,69 @@ const render = data => {
 
     console.log(option)
 
-    const legendDataC = [41257, 82514, 123771, 165028, 247542];
-    const legendDataP = [10000, 50000, 250000, 1250000, 6250000];
+    const mapChange = option => {
+        g.selectAll('circle')
+            .attr('class', 'bubble')
+            .transition()
+            .delay((d,i) => i * 10)
+            .attr('cx', d => projection([d.Longitude, d.Latitude])[0])
+            .attr('cy', d => projection([d.Longitude, d.Latitude])[1])
+            .attr('r', d => {
+                if(isNaN(t)){
+                    if(option == 'Population')
+                        return getRadius(d.Population) / 3;
+                    else
+                        return getRadius(d.ConfirmedCases);
+                }
+                else{
+                    if(option == 'Population')
+                        return getRadius(d.Population) / t / 3;
+                    else
+                        return getRadius(d.ConfirmedCases) / t / 0.9;
+                }
+            })
+            .style('fill', d => {
+                if(option == 'Population')
+                    return colorScaleP(d.Population);
+                else
+                    return colorScaleC(d.ConfirmedCases);
+            })
+            .selectAll('title')
+                .text(d => {
+                    if(option == 'Population')
+                        return `County: ${d.CountyName}\nPopulation: ${d.Population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+                    else
+                        return `County: ${d.CountyName}\nConfirmed Cases: ${d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+                });
 
+            legend.selectAll('rect')
+                .transition()
+                .delay((d,i) => i * 10)
+                .style('fill', d => {
+                    if(option == 'Population')
+                        return colorScaleP(d * 15);
+                    else
+                        return colorScaleC(d);
+                })
+
+            legend.selectAll('text')
+                .remove();
+
+            legend.selectAll('text')
+                .data(legendDataP).enter()
+                .append('text')
+                .attr('x', (d, i) => legendContainerSettings.x + legendBoxSetting.width * i + 30)
+                .attr('y', legendContainerSettings.y + 35)
+                .style('font-size', '.8em')
+                .text(d => {
+                    if(option == 'Population')
+                        return '> ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    else
+                        return '<= ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
+
+            getLegendTitle();
+    }
 
     g.selectAll('path').data(states.features)
         .enter().append('path')
@@ -170,8 +250,10 @@ const render = data => {
                 });
             g.selectAll('circle')
                 .attr('r', d => {
-                    if(option == 'ConfirmedCases') return getRadius(d.ConfirmedCases) / transform.k / 0.9;
-                    else return getRadius(d.Population) / transform.k / 3;
+                    if(option == 'ConfirmedCases') 
+                        return getRadius(d.ConfirmedCases) / transform.k / 0.9;
+                    else 
+                        return getRadius(d.Population) / transform.k / 3;
                 });
         }
     }));
@@ -184,24 +266,6 @@ const render = data => {
         .attr('width', legendContainerSettings.width)
         .attr('height', legendContainerSettings.height)
         .attr('class', 'legendContainer');
-
-    const legend = svg.selectAll('g.legend')
-        .data(legendDataC)
-        .enter().append('g')
-        .attr('class', 'legend');
-
-    const getLegendTitle = () => {
-        legend.append('text')
-            .attr('x', legendContainerSettings.x + 150)
-            .attr('y', legendContainerSettings.y + 15)
-            .style('font-size', '.8em')
-            .text(() => {
-               if(option == 'ConfirmedCases') 
-                    return 'Confirmed Cases Density';
-               else 
-                    return 'Population Density';
-            });
-    }
 
     legend.append('rect')
         .attr('x', (d,i) => legendContainerSettings.x + legendBoxSetting.width * i + 20)
@@ -221,80 +285,12 @@ const render = data => {
     getLegendTitle();
 
     change = selection => {
-        if(selection == 'Population'){
+        if(selection == 'Population')
             option = 'Population';
-
-            g.selectAll('circle')
-            .attr('class', 'bubble')
-            .transition()
-            .delay((d,i) => i * 10)
-            .attr('cx', d => projection([d.Longitude, d.Latitude])[0])
-            .attr('cy', d => projection([d.Longitude, d.Latitude])[1])
-            .attr('r', d => {
-                if(isNaN(t))
-                    return getRadius(d.Population) / 3;
-                else
-                    return getRadius(d.Population) / t / 3;
-            })
-            .style('fill', d => colorScaleP(d.Population))
-            .selectAll('title')
-                .text(d => `County: ${d.CountyName}\nPopulation: ${d.Population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
-
-            legend.selectAll('rect')
-                .transition()
-                .delay((d,i) => i * 10)
-                .style('fill', d => colorScaleP(d * 15))
-
-            legend.selectAll('text')
-                .remove();
-
-            legend.selectAll('text')
-                .data(legendDataP).enter()
-                .append('text')
-                .attr('x', (d, i) => legendContainerSettings.x + legendBoxSetting.width * i + 30)
-                .attr('y', legendContainerSettings.y + 35)
-                .style('font-size', '.8em')
-                .text(d => '> ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-
-            getLegendTitle();
-        }
-        else{
+        else
             option = 'ConfirmedCases';
 
-            g.selectAll('circle')
-            .attr('class', 'bubble')
-            .transition()
-            .delay((d,i) => i * 10)
-            .attr('cx', d => projection([d.Longitude, d.Latitude])[0])
-            .attr('cy', d => projection([d.Longitude, d.Latitude])[1])
-            .attr('r', d => {
-                if(isNaN(t))
-                    return getRadius(d.ConfirmedCases);
-                else
-                    return getRadius(d.ConfirmedCases) / t / 0.9;
-            })
-            .style('fill', d => colorScaleC(d.ConfirmedCases))
-            .selectAll('title')
-                .text(d => `County: ${d.CountyName}\nConfirmed Cases: ${d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
-
-            legend.selectAll('rect')
-                .transition()
-                .delay((d,i) => i * 20)
-                .style('fill', d => colorScaleC(d))
-
-            legend.selectAll('text')
-                .remove();
-
-            legend.selectAll('text')
-                .data(legendDataC).enter()
-                .append('text')
-                .attr('x', (d, i) => legendContainerSettings.x + legendBoxSetting.width * i + 30)
-                .attr('y', legendContainerSettings.y + 35)
-                .style('font-size', '.8em')
-                .text(d => '<= ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-
-            getLegendTitle();
-        }
+        mapChange(option);
     };
 };
 
