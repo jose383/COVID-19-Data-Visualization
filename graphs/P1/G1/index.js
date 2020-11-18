@@ -25,6 +25,31 @@ const legendBoxSetting = {
 let states;
 let us_territories = ['American Samoa', 'Guam', 'Commonwealth of the Northern Mariana Islands', 'Puerto Rico', 'United States Virgin Islands'];
 
+const getStates = data => {
+    if(data.properties.name == 'Delaware')
+        return 'DE';
+    else if(data.properties.name == 'District of Columbia')
+        return '';
+    else if(data.properties.name == 'Maryland')
+        return 'MD';
+    else if(data.properties.name == 'New Jersey')
+        return 'NJ';
+    else if(data.properties.name == 'Rhode Island')
+        return 'RI';
+    else if(data.properties.name == 'Maryland')
+        return 'MD';
+    else if(data.properties.name == 'Vermont')
+        return 'VT';
+    else if(data.properties.name == 'New Hampshire')
+        return 'NH';
+    else if(data.properties.name == 'Connecticut')
+        return 'CT';
+    else if(data.properties.name == 'Massachusetts')
+        return 'MA';
+    else 
+        return data.properties.name;
+}
+
 
 const render = data => {
 
@@ -58,44 +83,28 @@ const render = data => {
         .data(states.features)
         .enter().append('text')
         .text(d => {
-            if(d.properties.name == 'Delaware')
-                return 'DE';
-            else if(d.properties.name == 'Maryland')
-                return 'MD';
-            else if(d.properties.name == 'New Jersey')
-                return 'NJ';
-            else if(d.properties.name == 'District of Columbia')
-                return '';
-            else if(d.properties.name == 'Rhode Island')
-                return 'RI';
-            else if(d.properties.name == 'Maryland')
-                return 'MD';
-            else if(d.properties.name == 'Vermont')
-                return 'VT';
-            else if(d.properties.name == 'New Hampshire')
-                return 'NH';
-            else if(d.properties.name == 'Connecticut')
-                return 'CT';
-            else if(d.properties.name == 'Massachusetts')
-                return 'MA';
             if(!us_territories.includes(d.properties.name))
-                return d.properties.name;
+                return getStates(d);
         })
         .attr('text-anchor', 'middle')
         .attr('x', d => {
-            if(d.properties.name == 'Florida')
-                return path.centroid(d)[0] + 15;
+            if(!us_territories.includes(d.properties.name)){
+                if(d.properties.name == 'Florida')
+                    return path.centroid(d)[0] + 12;
 
-            if(d.properties.name == 'Michigan')
-                return path.centroid(d)[0] + 15;
+                if(d.properties.name == 'Michigan')
+                    return path.centroid(d)[0] + 15;
 
-            return path.centroid(d)[0]
+                return path.centroid(d)[0]
+            }
         })
         .attr('y', d => {
-            if(d.properties.name == 'Michigan')
-                return path.centroid(d)[0] + 25;
+            if(!us_territories.includes(d.properties.name)){
+                if(d.properties.name == 'Michigan')
+                    return path.centroid(d)[0] + 25;
 
-            return path.centroid(d)[1];
+                return path.centroid(d)[1];
+            }
         })
         .attr('fill', '#000000')
         .attr('font-size', font_size + '%');
@@ -111,27 +120,7 @@ const render = data => {
                         if(transform.k > 2.3)
                                 return d.properties.name;
                         else{
-                            if(d.properties.name == 'Delaware')
-                                return 'DE';
-                            else if(d.properties.name == 'District of Columbia')
-                                return '';
-                            else if(d.properties.name == 'Maryland')
-                                return 'MD';
-                            else if(d.properties.name == 'New Jersey')
-                                return 'NJ';
-                            else if(d.properties.name == 'Rhode Island')
-                                return 'RI';
-                            else if(d.properties.name == 'Maryland')
-                                return 'MD';
-                            else if(d.properties.name == 'Vermont')
-                                return 'VT';
-                            else if(d.properties.name == 'New Hampshire')
-                                return 'NH';
-                            else if(d.properties.name == 'Connecticut')
-                                return 'CT';
-                            else if(d.properties.name == 'Massachusetts')
-                                return 'MA';
-                            else return d.properties.name;
+                            return getStates(d);
                         }
                     }
                 });

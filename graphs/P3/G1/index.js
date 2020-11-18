@@ -163,12 +163,12 @@ const render = data => {
                 .text('Confirmed Cases per Province in China');
 };
 
-d3.json('../../../../data/P3/G1_2.json').then(data => {
+d3.json('../../../data/P3/G1_2.json').then(data => {
     provinces = topojson.feature(data, data.objects.CHN_adm1);
     console.log(provinces);
 });
 
-d3.csv('../../../../data/P3/G1.csv').then(data => {
+d3.csv('../../../data/P3/G1.csv').then(data => {
     data.forEach(d => {
         d.NumberOfRecords = +d.NumberOfRecords;
     });
