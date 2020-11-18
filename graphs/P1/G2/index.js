@@ -104,7 +104,7 @@ const getRadius = data => {
 
 const getLegendTitle = () => {
     legend.append('text')
-        .attr('x', legendContainerSettings.x + 150)
+        .attr('x', legendContainerSettings.x + 155)
         .attr('y', legendContainerSettings.y + 15)
         .style('font-size', '.8em')
         .text(() => {
@@ -194,7 +194,7 @@ const render = data => {
         .enter().append('path')
         .attr('class', 'state')
         .attr('d', path)
-        .attr('fill', '#E2E2E2')
+        .attr('fill', '#DCDCDC')
         .attr('stroke', '#C0C0C0');
 
     g.selectAll('circle')
