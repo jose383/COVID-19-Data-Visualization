@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>World Map</title>
+    <title>US Map</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,11 +21,9 @@
     <link href="../../../css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- D3 Libraries -->
-    <link rel="stylesheet" href="style.css">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
 
 </head>
 
@@ -38,7 +36,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../../index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon">
                 <i class="fas fa-virus"></i>
             </div>
@@ -50,7 +48,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="../../../index.html">
+            <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -191,8 +189,10 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <div>
-                        <h1 class="h3 mb-1 text-gray-800">World Map</h1>
-                        <p class="mb-4">A world map with Confirmed, Death, and Recovered Cases from 01/01/2020 to 08/22/2020</p>
+                        <h1 class="h3 mb-1 text-gray-800">Title</h1>
+                        <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                     </div>
                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i></a>
@@ -200,25 +200,41 @@
 
                 <div class="row">
 
-
                     <!-- Area Chart -->
                     <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Confirmed Cases Overview</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
 
-                        <!-- START GRAPH SECTION -->
+                                    <!-- START GRAPH SECTION -->
 
-                        <!-- Buttons -->
-                        <button id="CC" onclick="change('CC')">CONFIRMED CASES</button>
-                        <button id="D" onclick="change('D')">DEATHS</button>
-                        <button id="RC" onclick="change('RC')">RECOVERED CASES</button>
+                                    <svg></svg>
 
-                        <!-- World Map Graph from D3 -->
-                        <div id="ccgraph"></div>
-                        <div id="dgraph"></div>
-                        <div id="rgraph"></div>
-                        <!-- END World Map Graph from D3 -->
+                                    <!-- END GRAPH SECTION -->
 
-                        <!-- END GRAPH SECTION -->
-
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
