@@ -18,7 +18,7 @@
             rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../../css/sb-admin-2.css" rel="stylesheet">
 
     <!-- D3 Libraries -->
     <link rel="stylesheet" href="style.css">
@@ -83,17 +83,17 @@
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorld"
-               aria-expanded="true" aria-controls="collapseWorld">
+        <li class="nav-item active"> <!-- ADD 'active': Highlights the current Dropdown Menu -->
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseWorld"
+               aria-expanded="true" aria-controls="collapseWorld"> <!-- REMOVE 'collapsed': For Arrow to point downwards -->
                 <i class="fas fa-globe"></i>
                 <span>World Data</span>
             </a>
             <div id="collapseWorld" class="collapse show" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
+                 data-parent="#accordionSidebar"> <!-- ADD 'show': To keep open the menu list-->
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">All Cases:</h6>
-                    <a class="collapse-item active" href="../../../graphs/P2/G1/index.html">World Map</a>
+                    <a class="collapse-item active" href="../../../graphs/P2/G1/index.html">World Map</a> <!-- ADD 'active': To Highlight the page inside the menu list -->
                     <a class="collapse-item" href="../../../graphs/P2/G2/index.html">Control Efficiency</a>
                 </div>
             </div>
@@ -182,6 +182,14 @@
                 <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
+
+                <!-- Index Logo -->
+                <div class="ml-auto">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <span class="mr-2 align-middle font-weight-bold navbar-light">COVID-19</span>
+                        <i class="fas fa-virus fa-2x align-middle navbar-light"></i>
+                    </a>
+                </div>
             </nav>
             <!-- End of Topbar -->
 
@@ -192,11 +200,12 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <div>
                         <h1 class="h3 mb-1 text-gray-800">World Map</h1>
-                        <p class="mb-4">A world map with Confirmed, Death, and Recovered Cases from 01/01/2020 to 08/22/2020</p>
                     </div>
                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i></a>
+                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
+                <p class="mb-4">A world map with Confirmed, Death, and Recovered Cases from 01/01/2020 to 08/22/2020</p>
+
 
                 <div class="row">
 
@@ -204,7 +213,7 @@
                     <!-- Area Chart -->
                     <div class="col-xl-8 col-lg-7">
 
-                        <!-- START GRAPH SECTION -->
+                        <!-- START GRAPH SECTION - Codes for easy find with ctrl+f: GS, GRAPHS1 (add yours if you want, make sure its unique when you do ctrl+f!)-->
 
                         <!-- Buttons -->
                         <button id="CC" onclick="change('CC')">CONFIRMED CASES</button>
