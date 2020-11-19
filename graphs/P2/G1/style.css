@@ -1,6 +1,5 @@
 text {
     fill: grey;
-    font-family: Sentinel SSm A, Sentinel SSm B, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 
 .countries {
@@ -10,40 +9,33 @@ text {
     transform: translate(4em, -11em);
 }
 
-.legend {
-    font-size: 12px;
-}
-
 .caption {
     text-anchor: start;
     font-size: 14px;
 }
 
-button {
-    position: absolute;
-    background: white;
-    color: grey;
-    border: 0.125em solid grey;
-    border-radius: 0;
-    cursor: pointer;
-    letter-spacing: 0.125em;
-    margin: 0.5rem;
-    padding: 0.5em 2em;
-    
+g.legend {
+    transform: translate(5vw, 50vh);
+    font-size: 13px;
 }
 
-button#CC {
-    transform: translate(25vw, 0px);
-    outline-color: #243f97;
+a#CC,
+a#D,
+a#RC {
+    height: 26px;
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 0px;
 }
 
-button#D {
-    transform: translate(42.5vw, 0px);
-    outline-color: #c74648;
+a#CC {
+    transform: translate(0.5vw, -1vh);
 }
 
-button#RC {
-    transform: translate(55vw, 0px);
-    outline-color: #0b692a;
+a#D {
+    transform: translate(0.5vw, -4.3vh);
 }
 
+a#RC {
+    transform: translate(0.5vw, -6vh);
+}
