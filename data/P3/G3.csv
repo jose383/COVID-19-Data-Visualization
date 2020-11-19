@@ -1,31 +1,28 @@
 ﻿Symptoms,NumberofRecords
-yes,1
 weakness,1
-"vomiting, cough, fever (38.2 ?), sore throat",1
+"vomiting, cough, fever, sore throat",1
 transient fatigue,1
-"systemic weakness, runny nose, fever",1
-"Sputum, cough symptoms, fever (37 ?), cough, breathing difficulty",1
-"sore throat; fever, nasal discharge",1
-"sore throat, fever (38-39 ?)",1
-"sore throat, Cough, fever (37 ?)",1
-"Sore throat, chills",1
-Sore throat,1
+"weakness, runny nose, fever",1
+"sputum, cough symptoms, fever, cough, breathing difficulty",1
+"sore throat, fever, nasal discharge",1
+"sore throat, fever",1
+"sore throat, cough, fever",1
+"sore throat, chills",1
 sore throat,1
-similar to a respiratory infection,1
+sore throat,1
+respiratory infection,1
 severe dyspnea,1
 runny nose,1
-"rever, cough",1
+"fever, cough",1
 respiratory symptoms,2
 poor physical condition,1
-pneumonitis,19
+pneumonia,19
 pneumonia,7
 physical discomfort,1
 pharynx,1
-Pharyngeal dryness,1
+pharyngeal dryness,1
 pharyngeal discomfort,1
-no symptoms,1
-no serious symptoms,1
-"no respiratory symptoms, esophageal reflux",1
+esophageal reflux,1
 "nausea, vomiting",2
 "nausea, cough, pneumonia, fever",1
 nausea,1
@@ -33,23 +30,23 @@ nausea,1
 muscular soreness,1
 mild,2
 "malaise, headache",1
-"malaise, fever (37 ?); headache, toothache, pneumonia",1
-low fever (37.4 ?),1
-low fever (37.2 � C); cough,1
-low fever 37.0 ?,1
+"malaise, fever, headache, toothache, pneumonia",1
+low fever,1
+"low fever, cough",1
+low fever,1
 lesions on chest radiographs,1
-headache; dry mouth,1
+"headache, dry mouth",1
 flu-like symptoms,2
-fever;sore throat; fatigue; diarrhea,1
-fever; sore throat;fatigue;vomiting,1
-fever; runny nose,1
-fever; nasal congestion; runny nose; sore throat; cough,1
-fever; fatigue; dry cough,1
-fever; fatigue,3
-fever; dry mouth; throat discomfort,1
-fever; dry cough; fatigue,1
-fever; cough; fatigue; nausea,1
-fever; cough,2
+"fever,sore throat, fatigue, diarrhea",1
+"fever, sore throat,fatigue,vomiting",1
+"fever, runny nose",1
+"fever, nasal congestion, runny nose, sore throat, cough",1
+"fever, fatigue, dry cough",1
+"fever, fatigue",3
+"fever, dry mouth, throat discomfort",1
+"fever, dry cough, fatigue",1
+"fever, cough, fatigue, nausea",1
+"fever, cough",2
 "fever, weak",2
 "fever, sore throat, sputum",1
 "fever, sore throat, mild cough",1
@@ -74,87 +71,87 @@ fever; cough,2
 "fever, dry throat, sore throat",1
 "fever, cough, phlegm, dyspnea",2
 "fever, cough, phlegm",2
-"Fever, cough, headache",1
+"fever, cough, headache",1
 "fever, cough",6
-fever and cough,1
-"fever (40.3 ?), Headache, malaise, joint pain",1
-"fever (39.9 ?), cough",1
-"fever (39.5 ?), malaise",1
-fever (39.5 ?),1
-"fever (39.3 ?), cough",1
-"fever (39 � C), joint pain",1
-fever (38.3 ?),1
-"Fever (38.1 � C), cough, headache.",1
-"fever (38.0 ?), Fatigue, difficulty walking",1
-fever (38.0 ?),1
-"fever (38-39 � C), malaise",1
-Fever (38 � C),1
-fever (38 � C),4
-"fever (37.8 ?), cough",1
-"fever (37.5 ?, then 38 ?), cough, malaise",1
-fever (37.5 ? ? 38.0 ?),1
-"fever (37.4 � C), pneumonia",1
-"Fever (37.4 � C), malaise, sore throa",1
-"fever (37.4 ?), cough",1
-"fever (37.0 ?), fever (38.7 ?)",1
-"fever (37 ?), breathing difficulty",1
-fever 39.3,1
-fever 39.0 ?,1
-"fever 38.3 ? , cough",1
-fever 38.3,1
-"fever 38.2 ?, cough",1
-"fever 38.1 ? Cough, malaise, anorexia",1
-fever 38,3
-"fever 37.8 ? , sore throat",1
-fever 37.7?,2
-fever 37.5?,1
-"fever 37.5 , headache, malaise",1
-fever 37.2,1
-"fever 37.1 ? , couh",1
-fever 37 C,1
+"fever, cough",1
+"fever, headache, malaise, joint pain",1
+"fever, cough",1
+"fever, malaise",1
+fever,1
+"fever, cough",1
+"fever, joint pain",1
+fever,1
+"fever, cough, headache",1
+"fever, fatigue, breathing difficulty",1
+fever,1
+"fever, malaise",1
+fever,1
+fever,4
+"fever, cough",1
+"fever, cough, malaise",1
+fever,1
+"fever, pneumonia",1
+"fever, malaise, sore throa",1
+"fever, cough",1
+"fever, fever",1
+"fever, breathing difficulty",1
+fever,1
+fever,1
+"fever, cough",1
+fever,1
+"fever, cough",1
+"fever, cough, malaise",1
+fever,3
+"fever, sore throat",1
+fever,2
+fever,1
+"fever, headache, malaise",1
+fever,1
+"fever, couh",1
+fever,1
 fever,131
-"feeling ill, coughing",1
+"feeling ill, cough",1
 "fatigue, muscle aches, sore throat",1
 "fatigue, fever, weakness",1
 "fatigue, fever, headache",1
-"fatigue, fever (38 ?)",1
+"fatigue, fever",1
 "fatigue, fever",3
 fatigue,1
 "eye irritation, fever",1
 "dyspnea, fever",1
-dry throat; sore throat; fatigue,1
-dry throat; dry cough,1
+"dry throat, sore throat, fatigue",1
+"dry throat, dry cough",1
 dry cough,2
 "dizziness, sore limbs",1
 "discomfort, fever",1
 discomfort,3
-"Discharge, cough, sore throat, chest pain",1
-difficulty breathing,1
+"discharge, cough, sore throat, chest pain",1
+breathing difficulty,1
 "diarrhea, fever, nasal congestion, pleuritic chest pain, sore throat",1
 diarrhea,1
-"coughing, fever, muscle aches",1
-cough; throat discomfort,1
-cough; sputum; fever,2
-cough; sore body; cold,1
-cough; fever,1
+"cough, fever, muscle aches",1
+"cough, throat discomfort",1
+"cough, sputum, fever",2
+"cough, sore body, cold",1
+"cough, fever",1
 "cough, sputum",1
 "cough, sore throat, sputum",1
 "cough, sore throat",4
 "cough, shortness of breath",1
 "cough, runny nose",2
 "cough, respiratory problems",1
-"cough, phlegm, fever 37 degrees",1
-"cough, muscular stiffness, weak",1
-"cough, muscle soreness, sweating",1
+"cough, phlegm, fever",1
+"cough, muscular soreness, weak",1
+"cough, muscular soreness, sweating",1
 "cough, malaise",1
 "cough, high fever, myalgia",1
 "cough, headache",1
 "cough, fever, weakness",1
 "cough, fever, sputum",2
-"cough, fever, soreness",1
+"cough, fever, muscular soreness",1
 "cough, fever, sore throat",3
 "cough, fever, shortness of breath",3
-"cough, fever, shortness breath",1
+"cough, fever, shortness of breath",1
 "cough, fever, runny nose",4
 "cough, fever, pneumonia, respiratory distress",1
 "cough, fever, pneumonia",1
@@ -165,9 +162,9 @@ cough; fever,1
 "cough, fever, muscle ache",1
 "cough, fever, malaise",1
 "cough, fever, headache, muscular soreness, weak",1
-"cough, fever, eventually showed acute left heart failure and acute coronary syndrome",1
-"cough, fever (38.3 ?), joint pain",1
-"Cough, fever (38 ?)",1
+"cough, fever, acute coronary syndrome",1
+"cough, fever, joint pain",1
+"cough, fever",1
 "cough, fever",55
 "cough, fatigue, fever, weakness",1
 "cough, fatigue, fever, sputum",1
@@ -177,19 +174,19 @@ cough; fever,1
 "cough, dyspnea",1
 "cough, dizziness",1
 "cough, discomfort, fever, other symptoms",1
-"cough, difficulty breathing, fever",1
-"cough, diarrhoea, runny nose",1
-"cough, diarrheoa, vomiting",1
+"cough, breathing difficulty, fever",1
+"cough, diarrhea, runny nose",1
+"cough, diarrhea, vomiting",1
 "cough, diarrhea, fever, rhinorrhoea, sneezing",1
 "cough, chest tightness, dry mouth",1
 cough,15
 "chills, headache, fever",1
 "chills, headache, fatigue",1
 "chills, fever, runny nose, sore throat, wheezing",1
-"chills, fever, myalgias, sore throat",1
+"chills, fever, sore throat",1
 "chills, fever, muscle aches, other symptoms",1
 "chills, fever, headache, sore throat",1
-"chills,  fever (38 ?), malaise",1
+"chills,  fever, malaise",1
 "chills, fever",2
 "chills, fatigue",1
 "chills, diarrhea, dyspnea, headache, lack of energy, muscle pain",1
@@ -197,7 +194,7 @@ cough,15
 "chills, cough, fever",1
 "chills, cough, fatigue, fever",1
 "chills, conjunctivitis, cough, fever",1
-chest tightness; fatigue,1
+"chest tightness, fatigue",1
 "chest tightness, fever, nausea",1
 "chest tightness, fever",1
 "chest tightness, dyspnea, fever",1
@@ -207,13 +204,11 @@ chest tightness,1
 "chest distress, dyspnea",1
 "chest distress, cough, expectoration, muscular soreness",1
 asymptomatic,6
-"anorexia, fatigue",1
-anorexia,1
+fatigue,1
 "anhelation, cough, fever, pleural effusion, weakness",1
 "acute respiratory viral infection, fever",2
 acute pharyngitis,1
 "aching muscles, fever, pneumonia",1
 "abdominal pain, pulmonary inflammation",1
-"abdominal pain, diarrhea, fever, general malaise",1
-mild coughing",1
-
+"abdominal pain, diarrhea, fever, malaise",1
+cough,1

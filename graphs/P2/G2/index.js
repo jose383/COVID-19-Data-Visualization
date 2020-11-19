@@ -101,7 +101,6 @@ d3.csv('../../../data/P2/G2.csv', function (data) {
         })
         .append("title")
         .text((d) => {
-            console.log(d)
             return (d.data.Country + "\n" + (Math.round(+d.data.ControlEfficiency * 10) / 10).toFixed(1) + "\n" + d.data.Confirmed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
         });
 

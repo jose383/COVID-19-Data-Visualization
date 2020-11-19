@@ -1,0 +1,23 @@
+text {
+    fill: grey;
+}
+
+text.casesLabel,
+g.tick {
+    font-size: 13px;
+}
+
+.tick line,
+path.domain{
+    stroke: grey;
+}
+
+rect:hover{
+    opacity: .6;
+    stroke-width: 0;
+}
+
+path:hover{
+    opacity: .6;
+    stroke-width: 0;
+}

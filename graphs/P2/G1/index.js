@@ -59,7 +59,7 @@ ccsvg.select(".legend")
 
 // Draw Map
 d3.queue()
-    .defer(d3.json, "../../Common/world.geojson")
+    .defer(d3.json, "world.geojson")
     .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
         ccdata.set(d.code, +d.Confirmed);
     })
@@ -156,7 +156,7 @@ dsvg.select(".legend")
 
 // Draw Map
 d3.queue()
-    .defer(d3.json, "../../Common/world.geojson")
+    .defer(d3.json, "world.geojson")
     .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
         ddata.set(d.code, +d.Deaths);
     })
@@ -252,7 +252,7 @@ rsvg.select(".legend")
 
 // Draw Map
 d3.queue()
-    .defer(d3.json, "../../Common/world.geojson")
+    .defer(d3.json, "world.geojson")
     .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
         rdata.set(d.code, +d.Recovered);
     })

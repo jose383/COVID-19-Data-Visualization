@@ -1,8 +1,8 @@
 let w = window,
     d = document,
     e = d.documentElement,
-    width = w.innerWidth - 100 || e.clientWidth,
-    height = w.innerHeight - 100 || e.clientHeight;
+    width = w.innerWidth - 100 || e.clientWidth - 100,
+    height = w.innerHeight - 100 || e.clientHeight - 100;
 
 const svg = d3.select('svg')
     .attr('width', width)
@@ -15,6 +15,8 @@ let us_territories = ['American Samoa', 'Guam', 'Commonwealth of the Northern Ma
 
 let option = 'ConfirmedCases';
 let t;
+
+let change;
 
 const getStates = data => {
     return data.properties.name;
