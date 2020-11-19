@@ -60,43 +60,43 @@ d3.csv('../../../data/P2/G2.csv', function (data) {
         .attr('height', function (d) {
             return d.y1 - d.y0;
         })
-        .style("fill", function (d, i) {
+        .style("fill", function (d) {
             var color = d3.schemeYlGnBu[9];
             if (+d.data.ControlEfficiency > 500) {
-                return color[7];
-            }
-            else if (+d.data.ControlEfficiency > 100){
                 return color[6];
             }
-            else if (+d.data.ControlEfficiency > 50){
+            else if (+d.data.ControlEfficiency > 100){
                 return color[5];
             }
-            else if (+d.data.ControlEfficiency > 40){
+            else if (+d.data.ControlEfficiency > 50){
                 return color[4];
             }
-            else if (+d.data.ControlEfficiency > 30){
+            else if (+d.data.ControlEfficiency > 40){
                 return color[3];
             }
-            else if (+d.data.ControlEfficiency > 20){
+            else if (+d.data.ControlEfficiency > 30){
                 return color[2];
             }
-            else if (+d.data.ControlEfficiency > 10){
+            else if (+d.data.ControlEfficiency > 20){
                 return color[1];
             }
+            else if (+d.data.ControlEfficiency > 10){
+                return color[0];
+            }
             else {
-                return color[1];
+                return color[0];
             }
         })
         .on("mouseover", function (d) {
             d3.select(this)
                 .transition()
-                .duration(1000)
-                .style("opacity", 0.9)
+                .duration(500)
+                .style("opacity", 0.75)
         })
         .on("mouseout", function (d) {
             d3.select(this)
                 .transition()
-                .duration(1000)
+                .duration(500)
                 .style("opacity", 1)
         })
         .append("title")

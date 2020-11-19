@@ -1,14 +1,30 @@
-.state:hover{
-    opacity: .8;
+.states:hover{
+    opacity: .4;
+    stroke-width: 0;
+}
+
+.states {
+    fill: none;
+    stroke: grey;
+    stroke-width: 0.25;
+}
+
+text {
+    fill: grey;
 }
 
 .legendContainer{
-    fill: white;
-    stroke: black;
-    stroke-width: 2;
-    opacity: .3;
+    font-size: 13px;
+    fill: #ffffff00;
+    stroke-width: 0;
 }
 
-text{
-    font-family: sans-serif;
+.caption {
+    text-anchor: start;
+    font-size: 14px;
+}
+
+g.legend {
+    transform: translate(5vw, 50vh);
+    font-size: 13px;
 }

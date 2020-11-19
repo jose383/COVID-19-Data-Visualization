@@ -11,7 +11,7 @@ let ccsvg = d3.select("#ccgraph")
     .attr("style", "display:block;")
     .append("svg")
     .attr("width", width)
-    .attr("height", height)
+    .attr("height", height);
 
 let ccprojection = d3.geoPatterson()
     .scale(width / 2.5 / Math.PI)

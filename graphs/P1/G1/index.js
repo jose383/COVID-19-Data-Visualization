@@ -1,167 +1,120 @@
-const width = 1500;
-const height = 700;
-const font_size = 60;
+let w = window,
+    d = document,
+    e = d.documentElement,
+    width = w.innerWidth - 100 || e.clientWidth,
+    height = w.innerHeight - 100 || e.clientHeight;
 
 const svg = d3.select('svg')
     .attr('width', width)
     .attr('height', height);
+
 const g = svg.append('g');
 
-const legendContainerSettings = {
-    x: width / 2.6,
-    y: 475,
-    width: 440,
-    height: 60,
-    roundX: 10,
-    roundY: 10
-};
-
-const legendBoxSetting = {
-    width: 80,
-    height: 15,
-    y: legendContainerSettings.y + 55
-};
 
 let states;
 let us_territories = ['American Samoa', 'Guam', 'Commonwealth of the Northern Mariana Islands', 'Puerto Rico', 'United States Virgin Islands'];
 
 const getStates = data => {
-    if(data.properties.name == 'Delaware')
-        return 'DE';
-    else if(data.properties.name == 'District of Columbia')
-        return '';
-    else if(data.properties.name == 'Maryland')
-        return 'MD';
-    else if(data.properties.name == 'New Jersey')
-        return 'NJ';
-    else if(data.properties.name == 'Rhode Island')
-        return 'RI';
-    else if(data.properties.name == 'Maryland')
-        return 'MD';
-    else if(data.properties.name == 'Vermont')
-        return 'VT';
-    else if(data.properties.name == 'New Hampshire')
-        return 'NH';
-    else if(data.properties.name == 'Connecticut')
-        return 'CT';
-    else if(data.properties.name == 'Massachusetts')
-        return 'MA';
-    else 
-        return data.properties.name;
+    return data.properties.name;
 }
 
-
 const render = data => {
-
     const confirmed = new Map(data.map(d => [d.State, d.ConfirmedCases]));
-    const min = d3.min(data, d => d.ConfirmedCases);
-    const max = d3.max(data, d => d.ConfirmedCases);
 
-    const legendData = [147110, 294220, 441330, 588440, 735550];
-
-    const projection = d3.geoAlbersUsa().fitSize([width, height - 250], states);
+    d3.min(data, d => d.ConfirmedCases);
+    d3.max(data, d => d.ConfirmedCases);
+    
+    const colorScheme = d3.schemeBlues[8];
+    const legendData = [1, 50000, 100000, 150000, 200000, 400000, 600000, 700000];
+    const projection = d3.geoAlbersUsa().fitSize([width, height], states);
     const path = d3.geoPath().projection(projection);
 
-    const colorScale = d3.scaleLinear().domain([min, max])
-        .range(['white', 'orange']);
+    const colorScale = d3.scaleThreshold().domain(legendData)
+        .range(colorScheme);
 
     g.selectAll('path').data(states.features)
         .enter().append('path')
-        .attr('class', 'state')
+        .attr('class', 'states')
         .attr('d', path)
-        .attr('class', 'state')
+        .attr('class', 'states')
         .style('fill', d => colorScale(confirmed.get(d.properties.name)))
-        .attr('stroke', '#C0C0C0')
         .append('title')
         .text(d => {
-            if(!us_territories.includes(d.properties.name))
-                return 'Total Confirmed Cases: ' 
-                        + confirmed.get(d.properties.name).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            if (!us_territories.includes(d.properties.name))
+                return d.properties.name + ': ' +
+                    confirmed.get(d.properties.name).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
 
-    g.selectAll('text')
-        .data(states.features)
-        .enter().append('text')
-        .text(d => {
-            if(!us_territories.includes(d.properties.name))
-                return getStates(d);
+    let gl = svg.append("g")
+        .attr("class", "legend");
+
+    gl.append("text")
+        .attr("class", "caption")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text("Confirmed Cases")
+        .attr("transform", "translate(0, -15)");
+
+    let labels = ['1 - 49,999', '50,000 - 99,999', '100,000 - 149,999', '150,000 - 199,999', '200,000 - 399,999', '400,000 - 599,999', '600,000 - 699,999', '> 700,000'];
+    let legend = d3.legendColor()
+        .labels((d) => {
+            return labels[d.i];
         })
-        .attr('text-anchor', 'middle')
-        .attr('x', d => {
-            if(!us_territories.includes(d.properties.name)){
-                if(d.properties.name == 'Florida')
-                    return path.centroid(d)[0] + 12;
+        .shapePadding(3)
+        .scale(colorScale);
 
-                if(d.properties.name == 'Michigan')
-                    return path.centroid(d)[0] + 15;
+    svg.select(".legend")
+        .call(legend);
 
-                return path.centroid(d)[0]
-            }
-        })
-        .attr('y', d => {
-            if(!us_territories.includes(d.properties.name)){
-                if(d.properties.name == 'Michigan')
-                    return path.centroid(d)[0] + 25;
+    // g.selectAll('text')
+    //     .data(states.features)
+    //     .enter().append('text')
+    //     .text(d => {
+    //         if (!us_territories.includes(d.properties.name))
+    //             return getStates(d);
+    //     })
+    //     .attr('text-anchor', 'middle')
+    //     .attr('x', d => {
+    //         if (!us_territories.includes(d.properties.name)) {
+    //             if (d.properties.name == 'Florida')
+    //                 return path.centroid(d)[0] + 12;
 
-                return path.centroid(d)[1];
-            }
-        })
-        .attr('fill', '#000000')
-        .attr('font-size', font_size + '%');
+    //             if (d.properties.name == 'Michigan')
+    //                 return path.centroid(d)[0] + 15;
 
-    svg.call(d3.zoom().on('zoom', ({transform}) => {
-        g.attr('transform', transform);
+    //             return path.centroid(d)[0]
+    //         }
+    //     })
+    //     .attr('y', d => {
+    //         if (!us_territories.includes(d.properties.name)) {
+    //             if (d.properties.name == 'Michigan')
+    //                 return path.centroid(d)[0] + 25;
 
-        if(transform.k > 0.8){
-            g.selectAll('text')
-                .attr('font-size', (font_size/transform.k) + '%')
-                .text(d => {
-                    if(!us_territories.includes(d.properties.name)){
-                        if(transform.k > 2.3)
-                                return d.properties.name;
-                        else{
-                            return getStates(d);
-                        }
-                    }
-                });
-        }
-    }));
+    //             return path.centroid(d)[1];
+    //         }
+    //     })
+    //     .attr('fill', '#000000')
+    //     .attr('font-size', font_size + '%');
 
-    const legendContainer = svg.append('rect')
-        .attr('x', legendContainerSettings.x)
-        .attr('y', legendContainerSettings.y)
-        .attr('rx', legendContainerSettings.roundX)
-        .attr('ry', legendContainerSettings.roundY)
-        .attr('width', legendContainerSettings.width)
-        .attr('height', legendContainerSettings.height)
-        .attr('class', 'legendContainer');
+    // svg.call(d3.zoom().on('zoom', ({
+    //     transform
+    // }) => {
+    //     g.attr('transform', transform);
 
-    const legend = svg.selectAll('g.legend')
-        .data(legendData)
-        .enter().append('g')
-        .attr('class', 'legend');
-
-    legend.append('rect')
-        .attr('x', (d,i) => legendContainerSettings.x + legendBoxSetting.width * i + 20)
-        .attr('y', legendBoxSetting.y - 15)
-        .attr('width', legendBoxSetting.width)
-        .attr('height', legendBoxSetting.height)
-        .style('fill', d => colorScale(d))
-        .style('opacity', 1);
-
-    legend.selectAll('text')
-        .data(legendData)
-        .enter().append('text')
-        .attr('x', (d, i) => legendContainerSettings.x + legendBoxSetting.width * i + 30)
-        .attr('y', legendContainerSettings.y + 35)
-        .style('font-size', '70%')
-        .text(d => '<= ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-
-    legend.append('text')
-        .attr('x', legendContainerSettings.x + 140)
-        .attr('y', legendContainerSettings.y + 15)
-        .style('font-size', '.8em')
-        .text('Confirmed Cases Density');
+    //     if (transform.k > 0.8) {
+    //         g.selectAll('text')
+    //             .attr('font-size', (font_size / transform.k) + '%')
+    //             .text(d => {
+    //                 if (!us_territories.includes(d.properties.name)) {
+    //                     if (transform.k > 2.3)
+    //                         return d.properties.name;
+    //                     else {
+    //                         return getStates(d);
+    //                     }
+    //                 }
+    //             });
+    //     }
+    // }));
 };
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(data => {

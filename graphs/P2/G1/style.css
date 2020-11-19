@@ -22,9 +22,9 @@ g.legend {
 a#CC,
 a#D,
 a#RC {
-    height: 26px;
+    height: 30px;
     font-size: 14px;
-    padding-top: 2px;
+    padding-top: 3px;
     padding-bottom: 0px;
 }
 
@@ -33,9 +33,9 @@ a#CC {
 }
 
 a#D {
-    transform: translate(0.5vw, -4.3vh);
+    transform: translate(0.5vw, -4vh);
 }
 
 a#RC {
-    transform: translate(0.5vw, -6vh);
+    transform: translate(0.5vw, -5.3vh);
 }
