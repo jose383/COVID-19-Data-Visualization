@@ -1,5 +1,9 @@
-const width = 950,
-    height = 500;
+let w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    width = w.innerWidth || e.clientWidth || g.clientWidth,
+    height = w.innerHeight / 1.4 || e.clientHeight / 1.4 || g.clientHeight / 1.3;
 
 // Confirmed Cases
 let ccsvg = d3.select("#ccgraph")
@@ -10,8 +14,8 @@ let ccsvg = d3.select("#ccgraph")
     .attr("height", height)
 
 let ccprojection = d3.geoPatterson()
-    .scale(width / 2.4 / Math.PI)
-    .translate([width / 2, height]);
+    .scale(width / 2.5 / Math.PI)
+    .translate([width / 2.5, height / 1.15]);
 
 let ccpath = d3.geoPath()
     .projection(ccprojection);
@@ -24,8 +28,7 @@ let cccolorScale = d3.scaleThreshold()
     .range(cccolorScheme);
 
 let ccg = ccsvg.append("g")
-    .attr("class", "legend")
-    .attr("transform", "translate(20, 110)");
+    .attr("class", "legend");
 
 ccg.append("text")
     .attr("class", "caption")
@@ -94,8 +97,8 @@ let dsvg = d3.select("#dgraph")
     .attr("height", height)
 
 let dprojection = d3.geoPatterson()
-    .scale(width / 2.4 / Math.PI)
-    .translate([width / 2, height]);
+    .scale(width / 2.5 / Math.PI)
+    .translate([width / 2.5, height / 1.15]);
 
 let dpath = d3.geoPath()
     .projection(dprojection);
@@ -108,14 +111,13 @@ let dcolorScale = d3.scaleThreshold()
     .range(dcolorScheme);
 
 let dg = dsvg.append("g")
-    .attr("class", "legend")
-    .attr("transform", "translate(20, 110)");
+    .attr("class", "legend");
 
 dg.append("text")
     .attr("class", "caption")
     .attr("x", 0)
     .attr("y", 0)
-    .text("Deaths")
+    .text("Death Cases")
     .attr("transform", "translate(0, -15)");
 
 let dlabels = ['1 - 999', '1,000 - 9,999', '10,000 - 49,999', '50,000 - 74,999', '75,000 - 99,999', '100,000 - 124,999', '125,000 - 149,999', '> 150,000'];
@@ -124,7 +126,7 @@ let dlegend = d3.legendColor()
         return dlabels[d.i];
     })
     .labelOffset(25)
-    .shapePadding(16)
+    .shapePadding(18)
     .scale(dcolorScale);
 
 dsvg.select(".legend")
@@ -179,8 +181,8 @@ let rsvg = d3.select("#rgraph")
     .attr("height", height)
 
 let rprojection = d3.geoPatterson()
-    .scale(width / 2.4 / Math.PI)
-    .translate([width / 2, height]);
+    .scale(width / 2.5 / Math.PI)
+    .translate([width / 2.5, height / 1.15]);
 
 let rpath = d3.geoPath()
     .projection(rprojection);
@@ -193,14 +195,13 @@ let rcolorScale = d3.scaleThreshold()
     .range(rcolorScheme);
 
 let rg = rsvg.append("g")
-    .attr("class", "legend")
-    .attr("transform", "translate(20, 110)");
+    .attr("class", "legend");
 
 rg.append("text")
     .attr("class", "caption")
     .attr("x", 0)
     .attr("y", 0)
-    .text("Recovered")
+    .text("Recovered Cases")
     .attr("transform", "translate(0, -15)");
 
 let rlabels = ['1 - 9,999', '10,000 - 99,999', '100,000 - 499,999', '500,000 - 999,999', '1M - 1.49M', '1.5M - 1.99M', '2M - 2.49M', '> 2.5M'];
@@ -209,7 +210,7 @@ let rlegend = d3.legendColor()
         return rlabels[d.i];
     })
     .labelOffset(25)
-    .shapePadding(16)
+    .shapePadding(18)
     .scale(rcolorScale);
 
 rsvg.select(".legend")
