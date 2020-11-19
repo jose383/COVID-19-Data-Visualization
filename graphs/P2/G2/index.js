@@ -1,7 +1,7 @@
 var margin = {
         top: 10,
-        right: 250,
-        bottom: 50,
+        right: 10,
+        bottom: 10,
         left: 10
     },
     width = window.innerWidth - margin.left - margin.right - 50,
