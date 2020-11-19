@@ -4,8 +4,8 @@ var margin = {
         bottom: 10,
         left: 10
     },
-    width = window.innerWidth - margin.left - margin.right - 50,
-    height = window.innerHeight - margin.top - margin.bottom - 50;
+    width = window.innerWidth - margin.left - margin.right - 250,
+    height = window.innerHeight - margin.top - margin.bottom - 170;
 
 var svg = d3.select("#graph")
     .append("svg")
@@ -63,10 +63,10 @@ d3.csv('../../../data/P2/G2.csv', function (data) {
         .style("fill", function (d) {
             var color = d3.schemeYlGnBu[9];
             if (+d.data.ControlEfficiency > 500) {
-                return color[6];
+                return "#4e73df";
             }
             else if (+d.data.ControlEfficiency > 100){
-                return color[5];
+                return color[4];
             }
             else if (+d.data.ControlEfficiency > 50){
                 return color[4];
@@ -78,13 +78,13 @@ d3.csv('../../../data/P2/G2.csv', function (data) {
                 return color[2];
             }
             else if (+d.data.ControlEfficiency > 20){
-                return color[1];
+                return color[2];
             }
             else if (+d.data.ControlEfficiency > 10){
-                return color[0];
+                return color[2];
             }
             else {
-                return color[0];
+                return color[1];
             }
         })
         .on("mouseover", function (d) {

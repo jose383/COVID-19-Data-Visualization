@@ -1,201 +1,116 @@
-const width = 1500;
-const height = 700;
-const font_size = 60;
-
-const legendDataC = [41257, 82514, 123771, 165028, 247542];
-const legendDataP = [10000, 50000, 250000, 1250000, 6250000];
+let w = window,
+    d = document,
+    e = d.documentElement,
+    width = w.innerWidth - 100 || e.clientWidth,
+    height = w.innerHeight - 100 || e.clientHeight;
 
 const svg = d3.select('svg')
     .attr('width', width)
     .attr('height', height)
+
 const g = svg.append('g');
-const legend = svg.selectAll('g.legend')
-        .data(legendDataC)
-        .enter().append('g')
-        .attr('class', 'legend');
 
-const legendContainerSettings = {
-    x: width / 2.6,
-    y: 475,
-    width: 440,
-    height: 60,
-    roundX: 10,
-    roundY: 10
-};
-
-const legendBoxSetting = {
-    width: 80,
-    height: 15,
-    y: legendContainerSettings.y + 55
-};
-
-// Used to create CSV file of actual population in counties
-// const csv = data => {
-//     console.log(Object.keys(data[0]));
-
-//     let header = Object.keys(data[0]).join(',');
-//     let csv;
-//     let values = data.map(o => Object.values(o).join(',')).join('\n');
-
-//     csv += header + '\n' + values;
-    
-//     console.log(csv)
-// }
-
-let t;
 let states;
 let us_territories = ['American Samoa', 'Guam', 'Commonwealth of the Northern Mariana Islands', 'Puerto Rico', 'United States Virgin Islands'];
-let option = 'ConfirmedCases';
 
-const getStateName = data => {
-    if(data.properties.name == 'Delaware')
-        return 'DE';
-    else if(data.properties.name == 'Maryland')
-        return 'MD';
-    else if(data.properties.name == 'New Jersey')
-        return 'NJ';
-    else if(data.properties.name == 'District of Columbia')
-        return '';
-    else if(data.properties.name == 'Rhode Island')
-        return 'RI';
-    else if(data.properties.name == 'Maryland')
-        return 'MD';
-    else if(data.properties.name == 'Vermont')
-        return 'VT';
-    else if(data.properties.name == 'New Hampshire')
-        return 'NH';
-    else if(data.properties.name == 'Connecticut')
-        return 'CT';
-    else if(data.properties.name == 'Massachusetts')
-        return 'MA';
-    else
-        return data.properties.name;
+let option = 'ConfirmedCases';
+let t;
+
+const getStates = data => {
+    return data.properties.name;
 }
+const confirmed = [1, 1000, 5000, 10000, 50000, 100000, 150000, 200000];
+const population = [10000, 100000, 500000, 1000000, 3000000, 5000000, 7000000, 9000000]
 
 const getRadius = data => {
-    const confirmed = [816, 1675, 8606, 20850];
-    const pop = [93746, 187492, 281238, 374984]
-
-    if(option == 'ConfirmedCases'){
-        if(data <= confirmed[0])
-            return Math.sqrt(data) * 2.0 / 20;
-        else if(data <= confirmed[1])
-            return Math.sqrt(data) * 1.6 / 20 ;
-        else if(data <= confirmed[2])
-            return Math.sqrt(data) * 1.4 / 20;
-        else if(data <= confirmed[3])
-            return Math.sqrt(data) * 1.8 / 50;
+    if (option == 'ConfirmedCases') {
+        if (data <= confirmed[0])
+            return Math.sqrt(data) / 10;
+        else if (data <= confirmed[1])
+            return Math.sqrt(data) / 10;
+        else if (data <= confirmed[2])
+            return Math.sqrt(data) / 20;
+        else if (data <= confirmed[3])
+            return Math.sqrt(data) / 20;
         else
-            return Math.sqrt(data) / 40;
-    }
-    else{
-        if(data <= pop[0])
-            return Math.sqrt(data) * 1.6 / 40;
-        else if(data <= pop[1])
-            return Math.sqrt(data) * 1.5 /35;
-        else if(data <= pop[2])
-            return Math.sqrt(data) * 1.3 / 35;
-        else if(data <= pop[3])
-            return Math.sqrt(data) * 1.2 / 30;
+            return Math.sqrt(data) / 25;
+    } else {
+        if (data <= population[0])
+            return Math.sqrt(data) / 20;
+        else if (data <= population[2])
+            return Math.sqrt(data) / 25;
+        else if (data <= population[4])
+            return Math.sqrt(data) / 30;
+        else if (data <= population[6])
+            return Math.sqrt(data) / 30;
         else
-            return Math.sqrt(data) / 35;
+            return Math.sqrt(data) / 25;
     }
-}
-
-const getLegendTitle = () => {
-    legend.append('text')
-        .attr('x', legendContainerSettings.x + 155)
-        .attr('y', legendContainerSettings.y + 15)
-        .style('font-size', '.8em')
-        .text(() => {
-            if(option == 'ConfirmedCases') 
-                return 'Confirmed Cases Density';
-            else 
-                return 'Population Density';
-        });
 }
 
 const render = data => {
-    const projection = d3.geoAlbersUsa().fitSize([width, height - 250], states);
-    const path = d3.geoPath().projection(projection);
+    const projection = d3.geoAlbersUsa()
+        .fitSize([width, height], states);
 
-    const colorScaleC = d3.scaleLinear().domain([d3.min(data, d => d.ConfirmedCases), d3.max(data, d => d.ConfirmedCases)])
-        .range(d3.schemeYlOrRd[3]);
-    const colorScaleP = d3.scaleLinear().domain([d3.min(data, d => d.Population), d3.max(data, d => d.Population)])
-        .range(d3.schemeYlGnBu[3]);
+    const path = d3.geoPath()
+        .projection(projection);
 
-    console.log(option)
+    const cccolorScale = d3.scaleThreshold()
+        .domain(confirmed)
+        .range(d3.schemeBlues[8]);
+
+    const pcolorScale = d3.scaleThreshold()
+        .domain(population)
+        .range(d3.schemeYlGnBu[9]);
 
     const mapChange = option => {
         g.selectAll('circle')
             .attr('class', 'bubble')
             .transition()
-            .delay((d,i) => i * 10)
+            .delay((d, i) => i)
             .attr('cx', d => projection([d.Longitude, d.Latitude])[0])
             .attr('cy', d => projection([d.Longitude, d.Latitude])[1])
             .attr('r', d => {
-                if(isNaN(t)){
-                    if(option == 'Population')
-                        return getRadius(d.Population) / 3;
+                if (isNaN(t)) {
+                    if (option == 'Population')
+                        return getRadius(d.Population) / 5;
                     else
                         return getRadius(d.ConfirmedCases);
-                }
-                else{
-                    if(option == 'Population')
-                        return getRadius(d.Population) / t / 3;
+                } else {
+                    if (option == 'Population')
+                        return getRadius(d.Population) / t / 5;
                     else
                         return getRadius(d.ConfirmedCases) / t / 0.9;
                 }
             })
             .style('fill', d => {
-                if(option == 'Population')
-                    return colorScaleP(d.Population);
+                if (option == 'Population')
+                    return pcolorScale(d.Population);
                 else
-                    return colorScaleC(d.ConfirmedCases);
+                    return cccolorScale(d.ConfirmedCases);
             })
             .selectAll('title')
-                .text(d => {
-                    if(option == 'Population')
-                        return `County: ${d.CountyName}\nPopulation: ${d.Population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-                    else
-                        return `County: ${d.CountyName}\nConfirmed Cases: ${d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-                });
+            .text(d => {
+                if (option == 'Population')
+                    return `County: ${d.CountyName}\nPopulation: ${d.Population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+                else
+                    return `County: ${d.CountyName}\nConfirmed Cases: ${d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+            });
 
-            legend.selectAll('rect')
-                .transition()
-                .delay((d,i) => i * 10)
-                .style('fill', d => {
-                    if(option == 'Population')
-                        return colorScaleP(d * 15);
-                    else
-                        return colorScaleC(d);
-                })
-
-            legend.selectAll('text')
-                .remove();
-
-            legend.selectAll('text')
-                .data(legendDataP).enter()
-                .append('text')
-                .attr('x', (d, i) => legendContainerSettings.x + legendBoxSetting.width * i + 30)
-                .attr('y', legendContainerSettings.y + 35)
-                .style('font-size', '.8em')
-                .text(d => {
-                    if(option == 'Population')
-                        return '> ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    else
-                        return '<= ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                });
-
-            getLegendTitle();
+        if (option == 'Population') {
+            document.getElementsByClassName("cclegend")[0].style.display = "none";
+            document.getElementsByClassName("plegend")[0].style.display = "block";
+        } else {
+            document.getElementsByClassName("cclegend")[0].style.display = "block";
+            document.getElementsByClassName("plegend")[0].style.display = "none";
+        }
     }
 
     g.selectAll('path').data(states.features)
         .enter().append('path')
-        .attr('class', 'state')
+        .attr('class', 'states')
         .attr('d', path)
-        .attr('fill', '#DCDCDC')
-        .attr('stroke', '#C0C0C0');
+        .attr('fill', 'white');
 
     g.selectAll('circle')
         .data(data).enter()
@@ -204,100 +119,74 @@ const render = data => {
         .attr('cx', d => projection([d.Longitude, d.Latitude])[0])
         .attr('cy', d => projection([d.Longitude, d.Latitude])[1])
         .attr('r', d => getRadius(d.ConfirmedCases))
-            .style('fill', d => colorScaleC(d.ConfirmedCases))
+        .style('fill', d => cccolorScale(d.ConfirmedCases))
         .append('title')
-            .text(d => `County: ${d.CountyName}\nConfirmed Cases: ${d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+        .text(d => `County: ${d.CountyName}\nConfirmed Cases: ${d.ConfirmedCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
 
-    g.selectAll('text')
-        .data(states.features)
-        .enter()
-        .append('text')
-        .text(d => {
-            if(!us_territories.includes(d.properties.name))
-                return getStateName(d);
-        })
-        .attr('text-anchor', 'middle')
-        .attr('x', d => {
-            if(d.properties.name == 'Florida' || d.properties.name == 'Michigan')
-                return path.centroid(d)[0] + 10;
+    // Legend Hidden
+    let pgl = svg.append("g")
+        .attr("class", "plegend");
 
-            return path.centroid(d)[0];
-        })
-        .attr('y', d => {
-            if(d.properties.name == 'Michigan')
-                return path.centroid(d)[1] + 25;
-            
-            return path.centroid(d)[1]
-        })
-        .attr('fill', '#696969')
-        .attr('font-size', font_size + '%');
+    pgl.append("text")
+        .attr("class", "caption")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text("Confirmed Cases")
+        .attr("transform", "translate(0, -15)");
 
-    svg.call(d3.zoom().on('zoom', ({transform}) => {
-        t = transform.k;
+    let plabels = ['1 - 9,999', '10,000 - 99,999', '100,000- 499,999', '500,000 - 999,999', '1M - 2.9M', '3M - 4.9M', '5M - 6.9M', '7M - 8.9M', ' > 9M'];
+    let plegend = d3.legendColor()
+        .labels((d) => {
+            return plabels[d.i];
+        })
+        .shapePadding(3)
+        .scale(pcolorScale);
+
+    svg.select(".plegend")
+        .call(plegend);
+
+    // Legend Default
+    let ccgl = svg.append("g")
+        .attr("class", "cclegend");
+
+    ccgl.append("text")
+        .attr("class", "caption")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text("Confirmed Cases")
+        .attr("transform", "translate(0, -15)");
+
+    let cclabels = ['1 - 9,999', '10,000 - 4,999', '5,000 - 9,999', '10,000 - 49,999', '50,000 - 99,999', '100,000 - 149,999', '150,000 - 199,999', '> 200,000'];
+    let cclegend = d3.legendColor()
+        .labels((d) => {
+            return cclabels[d.i];
+        })
+        .shapePadding(3)
+        .scale(cccolorScale);
+
+    svg.select(".cclegend")
+        .call(cclegend);
+
+    document.getElementsByClassName("cclegend")[0].style.display = "block";
+    document.getElementsByClassName("plegend")[0].style.display = "none";
+
+    svg.call(d3.zoom().scaleExtent([1, 8]).on('zoom', ({
+        transform
+    }) => {
         g.attr('transform', transform);
-        console.log(transform.k);
-
-        if(transform.k > 0.8){
-            g.selectAll('text')
-                .attr('font-size', (font_size/transform.k) + '%')
-                .text(d => {
-                    if(!us_territories.includes(d.properties.name)){
-                        if(transform.k > 2.3)
-                                return d.properties.name;
-                        else
-                            return getStateName(d);
-                    }
-                });
-            g.selectAll('circle')
-                .attr('r', d => {
-                    if(option == 'ConfirmedCases') 
-                        return getRadius(d.ConfirmedCases) / transform.k / 0.9;
-                    else 
-                        return getRadius(d.Population) / transform.k / 3;
-                });
-        }
     }));
 
-    svg.append('rect')
-        .attr('x', legendContainerSettings.x)
-        .attr('y', legendContainerSettings.y)
-        .attr('rx', legendContainerSettings.roundX)
-        .attr('ry', legendContainerSettings.roundY)
-        .attr('width', legendContainerSettings.width)
-        .attr('height', legendContainerSettings.height)
-        .attr('class', 'legendContainer');
-
-    legend.append('rect')
-        .attr('x', (d,i) => legendContainerSettings.x + legendBoxSetting.width * i + 20)
-        .attr('y', legendContainerSettings.y + 40)
-        .attr('width', legendBoxSetting.width)
-        .attr('height', legendBoxSetting.height)
-        .style('fill', d => colorScaleC(d));
-
-    legend.selectAll('text')
-        .data(legendDataC)
-        .enter().append('text')
-        .attr('x', (d, i) => legendContainerSettings.x + legendBoxSetting.width * i + 30)
-        .attr('y', legendContainerSettings.y + 35)
-        .style('font-size', '.8em')
-        .text(d => '<= ' + d.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-
-    getLegendTitle();
-
     change = selection => {
-        if(selection == 'Population')
+        if (selection == 'Population')
             option = 'Population';
         else
             option = 'ConfirmedCases';
-
         mapChange(option);
     };
 };
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(data => {
     states = topojson.feature(data, data.objects.states);
-
-    console.log(states);
 });
 
 d3.csv('../../../data/P1/G2.csv').then(data => {
@@ -305,7 +194,5 @@ d3.csv('../../../data/P1/G2.csv').then(data => {
         d.ConfirmedCases = +d.ConfirmedCases;
         d.Population = +d.Population;
     });
-
     render(data);
-    console.log(data);
 });

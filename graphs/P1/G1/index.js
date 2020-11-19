@@ -10,7 +10,6 @@ const svg = d3.select('svg')
 
 const g = svg.append('g');
 
-
 let states;
 let us_territories = ['American Samoa', 'Guam', 'Commonwealth of the Northern Mariana Islands', 'Puerto Rico', 'United States Virgin Islands'];
 
@@ -23,13 +22,19 @@ const render = data => {
 
     d3.min(data, d => d.ConfirmedCases);
     d3.max(data, d => d.ConfirmedCases);
-    
-    const colorScheme = d3.schemeBlues[8];
-    const legendData = [1, 50000, 100000, 150000, 200000, 400000, 600000, 700000];
-    const projection = d3.geoAlbersUsa().fitSize([width, height], states);
-    const path = d3.geoPath().projection(projection);
 
-    const colorScale = d3.scaleThreshold().domain(legendData)
+    const colorScheme = d3.schemeBlues[8];
+
+    const legendData = [1, 50000, 100000, 150000, 200000, 400000, 600000, 700000];
+
+    const projection = d3.geoAlbersUsa()
+        .fitSize([width, height], states);
+
+    const path = d3.geoPath()
+        .projection(projection);
+
+    const colorScale = d3.scaleThreshold()
+        .domain(legendData)
         .range(colorScheme);
 
     g.selectAll('path').data(states.features)
@@ -66,55 +71,11 @@ const render = data => {
     svg.select(".legend")
         .call(legend);
 
-    // g.selectAll('text')
-    //     .data(states.features)
-    //     .enter().append('text')
-    //     .text(d => {
-    //         if (!us_territories.includes(d.properties.name))
-    //             return getStates(d);
-    //     })
-    //     .attr('text-anchor', 'middle')
-    //     .attr('x', d => {
-    //         if (!us_territories.includes(d.properties.name)) {
-    //             if (d.properties.name == 'Florida')
-    //                 return path.centroid(d)[0] + 12;
-
-    //             if (d.properties.name == 'Michigan')
-    //                 return path.centroid(d)[0] + 15;
-
-    //             return path.centroid(d)[0]
-    //         }
-    //     })
-    //     .attr('y', d => {
-    //         if (!us_territories.includes(d.properties.name)) {
-    //             if (d.properties.name == 'Michigan')
-    //                 return path.centroid(d)[0] + 25;
-
-    //             return path.centroid(d)[1];
-    //         }
-    //     })
-    //     .attr('fill', '#000000')
-    //     .attr('font-size', font_size + '%');
-
-    // svg.call(d3.zoom().on('zoom', ({
-    //     transform
-    // }) => {
-    //     g.attr('transform', transform);
-
-    //     if (transform.k > 0.8) {
-    //         g.selectAll('text')
-    //             .attr('font-size', (font_size / transform.k) + '%')
-    //             .text(d => {
-    //                 if (!us_territories.includes(d.properties.name)) {
-    //                     if (transform.k > 2.3)
-    //                         return d.properties.name;
-    //                     else {
-    //                         return getStates(d);
-    //                     }
-    //                 }
-    //             });
-    //     }
-    // }));
+    svg.call(d3.zoom().scaleExtent([1, 8]).on('zoom', ({
+        transform
+    }) => {
+        g.attr('transform', transform);
+    }));
 };
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(data => {

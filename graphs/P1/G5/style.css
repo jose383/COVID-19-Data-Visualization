@@ -1,6 +1,5 @@
 text {
     fill: grey;
-    font-family: Sentinel SSm A, Sentinel SSm B, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 
 .tick line,
@@ -10,19 +9,6 @@ path.domain {
 
 g.tick {
     font-size: 12px;
-}
-
-button {
-    position: absolute;
-    background: white;
-    color: grey;
-    border: 0.125em solid grey;
-    border-radius: 0;
-    cursor: pointer;
-    letter-spacing: 0.125em;
-    margin: 0.5rem;
-    padding: 0.5em 2em;
-    outline-color: #e15759;
 }
 
 button#CA {

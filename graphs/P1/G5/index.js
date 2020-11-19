@@ -5,8 +5,11 @@ const margin = {
         bottom: 100,
         left: 100
     },
-    width = 1000 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    w = window,
+    d = document,
+    e = d.documentElement,
+    width = w.innerWidth - 200 || e.clientWidth,
+    height = w.innerHeight - 200 || e.clientHeight;
 
 // Append the svg object to the a div
 let svg = d3.select("#graph")
@@ -96,7 +99,7 @@ d3.csv("../../../data/P1/G5.csv", (data) => {
             })
         )
         .attr("stroke", () => {
-            return '#e15759';
+            return 'rgb(78, 115, 223)';
         })
         .style("stroke-width", 1.5)
         .style("fill", "none");
@@ -142,7 +145,7 @@ d3.csv("../../../data/P1/G5.csv", (data) => {
                 })
             )
             .attr("stroke", () => {
-                return '#e15759'
+                return 'rgb(78, 115, 223)'
             })
 
         // Create dots per entry

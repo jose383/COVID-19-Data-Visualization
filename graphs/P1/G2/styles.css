@@ -1,12 +1,34 @@
-.legendContainer{
-    fill: white;
-    stroke: black;
-    stroke-width: 2;
-    opacity: .5;
+
+.states:hover{
+    opacity: .4;
+    stroke-width: 0;
 }
 
-text{
-    font-family: sans-serif;
+.states {
+    fill: none;
+    stroke: grey;
+    stroke-width: 0.25;
+}
+
+text {
+    fill: grey;
+}
+
+.legendContainer{
+    font-size: 13px;
+    fill: #ffffff00;
+    stroke-width: 0;
+}
+
+.caption {
+    text-anchor: start;
+    font-size: 14px;
+}
+
+g.cclegend, 
+g.plegend {
+    transform: translate(5vw, 50vh);
+    font-size: 13px;
 }
 
 .bubble{
@@ -15,9 +37,6 @@ text{
     stroke-width: .1px;
 }
 
-button{
-    background-color: white;
-    outline-color: red;
-    padding: .5em;
-    transform: translate(625px, 0px);
+button {
+    position: absolute;
 }

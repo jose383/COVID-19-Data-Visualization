@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
 </head>
 <body>
-    <button id='ConfirmedCases' onclick="change('ConfirmedCases')">Density of Confirmed Cases</button>
-    <button id='Population' onclick="change('Population')">Density of Population</button>
+    <button id='ConfirmedCases' onclick="change('ConfirmedCases')">Confirmed Cases</button>
+    <button id='Population' onclick="change('Population')">Population</button>
     <svg></svg>
     <script src="index.js"></script>
 </body>

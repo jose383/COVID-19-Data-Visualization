@@ -67,7 +67,7 @@ d3.csv("../../../data/P1/G4.csv").then((data) => {
             return x(d.Cases);
         })
         .attr("height", y.bandwidth())
-        .attr("fill", "#e15759");
+        .attr("fill", "#4e73df");
 
     // Add bar labels
     svg.selectAll("labels")

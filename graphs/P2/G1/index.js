@@ -1,18 +1,8 @@
 let w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
-    width = w.innerWidth || e.clientWidth || g.clientWidth,
-    height = w.innerHeight / 1.4 || e.clientHeight / 1.4 || g.clientHeight / 1.3;
+    width = w.innerWidth,
+    height = w.innerHeight / 1.4;
 
 // Confirmed Cases
-let ccsvg = d3.select("#ccgraph")
-    .attr("id", "CCSVG")
-    .attr("style", "display:block;")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
 let ccprojection = d3.geoPatterson()
     .scale(width / 2.5 / Math.PI)
     .translate([width / 2.5, height / 1.15]);
@@ -20,6 +10,25 @@ let ccprojection = d3.geoPatterson()
 let ccpath = d3.geoPath()
     .projection(ccprojection);
 
+let ccsvg = d3.select("#ccgraph")
+    .attr("id", "CCSVG")
+    .attr("style", "display:block;")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+let ccg = ccsvg.append('g');
+
+ccsvg.call(d3.zoom()
+    .scaleExtent([1, 8])
+    .on('zoom', cczoomed));
+
+function cczoomed() {
+    ccg.selectAll('path')
+        .attr('transform', d3.event.transform);
+}
+
+// Labels
 let ccdata = d3.map();
 let cccolorScheme = d3.schemeBlues[8];
 
@@ -27,10 +36,10 @@ let cccolorScale = d3.scaleThreshold()
     .domain([1, 10000, 100000, 1000000, 2000000, 3000000, 4000000, 5000000])
     .range(cccolorScheme);
 
-let ccg = ccsvg.append("g")
+let ccglegend = ccsvg.append("g")
     .attr("class", "legend");
 
-ccg.append("text")
+ccglegend.append("text")
     .attr("class", "caption")
     .attr("x", 0)
     .attr("y", 0)
@@ -48,6 +57,7 @@ let cclegend = d3.legendColor()
 ccsvg.select(".legend")
     .call(cclegend);
 
+// Draw Map
 d3.queue()
     .defer(d3.json, "../../Common/world.geojson")
     .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
@@ -57,8 +67,7 @@ d3.queue()
 
 function ccready(error, topo) {
     if (error) throw error;
-    ccsvg.append("g")
-        .attr("class", "countries")
+    ccg.attr("class", "countries")
         .selectAll("path")
         .data(topo.features)
         .enter()
@@ -89,13 +98,6 @@ function ccready(error, topo) {
 }
 
 // Deaths 
-let dsvg = d3.select("#dgraph")
-    .attr("id", "DSVG")
-    .attr("style", "display:none;")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-
 let dprojection = d3.geoPatterson()
     .scale(width / 2.5 / Math.PI)
     .translate([width / 2.5, height / 1.15]);
@@ -103,6 +105,26 @@ let dprojection = d3.geoPatterson()
 let dpath = d3.geoPath()
     .projection(dprojection);
 
+let dsvg = d3.select("#dgraph")
+    .attr("id", "DSVG")
+    .attr("style", "display:none;")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+
+
+let dg = dsvg.append('g');
+
+dsvg.call(d3.zoom()
+    .scaleExtent([1, 8])
+    .on('zoom', dzoomed));
+
+function dzoomed() {
+    dg.selectAll('path')
+        .attr('transform', d3.event.transform);
+}
+
+// Labels
 let ddata = d3.map();
 let dcolorScheme = d3.schemeReds[8];
 
@@ -110,10 +132,10 @@ let dcolorScale = d3.scaleThreshold()
     .domain([1, 1000, 10000, 50000, 75000, 100000, 125000, 150000])
     .range(dcolorScheme);
 
-let dg = dsvg.append("g")
+let dglegend = dsvg.append("g")
     .attr("class", "legend");
 
-dg.append("text")
+dglegend.append("text")
     .attr("class", "caption")
     .attr("x", 0)
     .attr("y", 0)
@@ -132,6 +154,7 @@ let dlegend = d3.legendColor()
 dsvg.select(".legend")
     .call(dlegend);
 
+// Draw Map
 d3.queue()
     .defer(d3.json, "../../Common/world.geojson")
     .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
@@ -141,8 +164,7 @@ d3.queue()
 
 function dready(error, topo) {
     if (error) throw error;
-    dsvg.append("g")
-        .attr("class", "countries")
+    dg.attr("class", "countries")
         .selectAll("path")
         .data(topo.features)
         .enter()
@@ -173,13 +195,6 @@ function dready(error, topo) {
 }
 
 // Recovered
-let rsvg = d3.select("#rgraph")
-    .attr("id", "RSVG")
-    .attr("style", "display:none;")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-
 let rprojection = d3.geoPatterson()
     .scale(width / 2.5 / Math.PI)
     .translate([width / 2.5, height / 1.15]);
@@ -187,6 +202,25 @@ let rprojection = d3.geoPatterson()
 let rpath = d3.geoPath()
     .projection(rprojection);
 
+let rsvg = d3.select("#rgraph")
+    .attr("id", "RSVG")
+    .attr("style", "display:none;")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+
+let rg = rsvg.append('g');
+
+rsvg.call(d3.zoom()
+    .scaleExtent([1, 8])
+    .on('zoom', rzoomed));
+
+function rzoomed() {
+    rg.selectAll('path')
+        .attr('transform', d3.event.transform);
+}
+
+// Labes
 let rdata = d3.map();
 let rcolorScheme = d3.schemeGreens[8];
 
@@ -194,10 +228,10 @@ let rcolorScale = d3.scaleThreshold()
     .domain([1, 10000, 100000, 500000, 1000000, 1500000, 2000000, 2500000])
     .range(rcolorScheme);
 
-let rg = rsvg.append("g")
+let rglegend = rsvg.append("g")
     .attr("class", "legend");
 
-rg.append("text")
+rglegend.append("text")
     .attr("class", "caption")
     .attr("x", 0)
     .attr("y", 0)
@@ -216,6 +250,7 @@ let rlegend = d3.legendColor()
 rsvg.select(".legend")
     .call(rlegend);
 
+// Draw Map
 d3.queue()
     .defer(d3.json, "../../Common/world.geojson")
     .defer(d3.csv, "../../../data/P2/G1.csv", (d) => {
@@ -225,8 +260,7 @@ d3.queue()
 
 function rready(error, topo) {
     if (error) throw error;
-    rsvg.append("g")
-        .attr("class", "countries")
+    rg.attr("class", "countries")
         .selectAll("path")
         .data(topo.features)
         .enter()
