@@ -40,3 +40,7 @@ g.plegend {
 button {
     position: absolute;
 }
+
+.center-block {
+    float: none !important
+}

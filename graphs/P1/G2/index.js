@@ -1,8 +1,8 @@
 let w = window,
     d = document,
     e = d.documentElement,
-    width = w.innerWidth - 100 || e.clientWidth - 100,
-    height = w.innerHeight - 100 || e.clientHeight - 100;
+    width = w.innerWidth - 275 || e.clientWidth - 275,
+    height = w.innerHeight - 275 || e.clientHeight - 275;
 
 const svg = d3.select('svg')
     .attr('width', width)
@@ -133,7 +133,7 @@ const render = data => {
         .attr("class", "caption")
         .attr("x", 0)
         .attr("y", 0)
-        .text("Confirmed Cases")
+        .text("Population")
         .attr("transform", "translate(0, -15)");
 
     let plabels = ['1 - 9,999', '10,000 - 99,999', '100,000- 499,999', '500,000 - 999,999', '1M - 2.9M', '3M - 4.9M', '5M - 6.9M', '7M - 8.9M', ' > 9M'];

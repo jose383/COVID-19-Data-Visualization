@@ -1,11 +1,11 @@
 // Set the dimensions and margins of the graph
 const margin = {
-        top: 50,
+        top: 5,
         right: 20,
         bottom: 100,
-        left: 100
+        left: 60
     },
-    width = 5000 - margin.left - margin.right,
+    width = window.innerWidth * 3,
     height = window.innerHeight - margin.top - margin.bottom;
 
 // Append the svg object to the a div
@@ -107,7 +107,7 @@ d3.csv("../../../data/P1/G3.csv", (data) => {
 
     svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - 90)
+        .attr("y", 0 - 60)
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
@@ -176,4 +176,5 @@ d3.csv("../../../data/P1/G3.csv", (data) => {
             .style("text-anchor", "middle")
             .text(d);
     });
+    
 });

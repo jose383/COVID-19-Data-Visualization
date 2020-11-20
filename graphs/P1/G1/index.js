@@ -1,8 +1,8 @@
 let w = window,
     d = document,
     e = d.documentElement,
-    width = w.innerWidth - 100 || e.clientWidth,
-    height = w.innerHeight - 100 || e.clientHeight;
+    width = w.innerWidth - 200 || e.clientWidth - 200,
+    height = w.innerHeight - 200 || e.clientHeight - 200;
 
 const svg = d3.select('svg')
     .attr('width', width)

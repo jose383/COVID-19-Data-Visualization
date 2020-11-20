@@ -163,7 +163,7 @@ const render2 = data => {
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    let colors = d3.schemeTableau10;
+    let colors = ["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854","#ffd92f","#e5c494","#b3b3b3"];
 
     const xScale = d3.scaleBand()
         .domain(data.map(xValue))

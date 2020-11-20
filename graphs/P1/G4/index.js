@@ -1,12 +1,12 @@
 // Set the dimensions and margins of the graph
 const margin = {
-        top: 0,
-        right: 50,
-        bottom: 90,
-        left: 100
-    },
-    width = window.innerWidth - margin.left - margin.right - 10,
-    height =  window.innerHeight - margin.top - margin.bottom - 20;
+    top: 25,
+    right: 50,
+    bottom: 90,
+    left: 100
+},
+width = window.innerWidth - margin.left - margin.right - 250,
+height =  window.innerHeight * 1.1;
 
 // Append the svg object to the a div
 let svg = d3.select("#graph")
@@ -31,7 +31,7 @@ d3.csv("../../../data/P1/G4.csv").then((data) => {
         .style("text-anchor", "end");
 
     svg.append("text")
-        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 55) + ")")
+        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
         .attr("font-size", "18px")
         .style("text-anchor", "middle")
         .text("Confirmed Cases");

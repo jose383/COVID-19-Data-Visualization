@@ -28,14 +28,3 @@ a#RC {
     padding-bottom: 0px;
 }
 
-a#CC {
-    transform: translate(0.5vw, -1vh);
-}
-
-a#D {
-    transform: translate(0.5vw, -4vh);
-}
-
-a#RC {
-    transform: translate(0.5vw, -5.3vh);
-}

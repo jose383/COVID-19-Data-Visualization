@@ -26,3 +26,7 @@ button#FL {
 button#NY {
     transform: translate(52em, 0px);
 }
+
+a#first {
+    margin-left: 4em;
+}
