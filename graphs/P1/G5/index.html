@@ -106,9 +106,9 @@
             <div id="collapseChina" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Confirmed Cases:</h6>
-                    <a class="collapse-item" href="../../../graphs/P3/G2/G1/index.html">Provinces (Map)</a>
+                    <a class="collapse-item" href="../../../graphs/P3/G1/index.html">Provinces (Map)</a>
                     <a class="collapse-item" href="../../../graphs/P3/G2/index.html">By Ages (Bar)</a>
-                    <a class="collapse-item" href="../../../graphs/P3/G5/index.html">Symptoms (Bar)</a>
+                    <a class="collapse-item" href="../../../graphs/P3/G3/index.html">Symptoms (Bar)</a>
                 </div>
             </div>
         </li>
@@ -131,9 +131,9 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Data Analysis:</h6>
-                    <a class="collapse-item" href="" target="_blank" rel="noopener noreferrer">Isaac Villalva</a>
-                    <a class="collapse-item" href="" target="_blank" rel="noopener noreferrer">Abubakir Siedahmed</a>
-                    <a class="collapse-item" href="https://github.com/Groverino" target="_blank" rel="noopener noreferrer">John Grover Rodriguez</a>
+                    <a class="collapse-item" href="https://www.linkedin.com/in/isaacvillalva/" target="_blank" rel="noopener noreferrer">Isaac Villalva</a>
+                    <a class="collapse-item" href="https://www.linkedin.com/in/abubakir-siedahmed-684ba3170/" target="_blank" rel="noopener noreferrer">Abubakir Siedahmed</a>
+                    <a class="collapse-item" href="https://www.linkedin.com/in/jgrover9841/" target="_blank" rel="noopener noreferrer">John Grover Rodriguez</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Graphs:</h6>
                     <a class="collapse-item" href="https://github.com/KevinCrespin" target="_blank" rel="noopener noreferrer">Kevin Crespin Ruiz</a>
@@ -143,7 +143,7 @@
                     <h6 class="collapse-header">Website:</h6>
                     <a class="collapse-item" href="https://github.com/jose383/" target="_blank" rel="noopener noreferrer">Jose Lopez</a>
                     <a class="collapse-item" href="https://github.com/TypicalEDIt" target="_blank" rel="noopener noreferrer">Kennedy Nguyen</a>
-                    <a class="collapse-item" href="" target="_blank" rel="noopener noreferrer">Leo Shapiro</a>
+                    <a class="collapse-item" href="https://github.com/lhs328" target="_blank" rel="noopener noreferrer">Leo Shapiro</a>
                 </div>
             </div>
         </li>
@@ -197,15 +197,42 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <div>
                         <h1 class="h3 mb-1 text-gray-800">Line Graph of Worse Four U.S States</h1>
-                        <p class="mb-4">Line Graph for Selected State's Confirmed Cases from 01/01/2020 to 08/22/2020<br>
-                            Pressing the State's Button Will Change the Current Graph to that State's Graph
-                        </p>
                     </div>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i></a>
+                    <a href="../../../data/P1/G3.csv" download="us_states_ca_tx_fl_ny.csv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
+                <p class="mb-4">Line Graph for Selected State's Confirmed Cases from 01/01/2020 to 08/22/2020<br>
+                    Pressing the State's Button Will Change the current graph to that State's Graph
+                </p>
 
                 <div class="row">
+                    <!-- Confirmed Cases Button -->
+                    <div class="col-xl-3 col-md-6 mb-2">
+                        <a href="#" class="btn btn-outline-dark" role="button" onclick="change('CA')">
+                            <span class="text">CA</span>
+                        </a>
+                    </div>
+
+                    <!-- Death Cases Button -->
+                    <div class="col-xl-3 col-md-6 mb-2">
+                        <a href="#" class="btn btn-outline-dark" role="button" onclick="change('TX')">
+                            <span class="text">TX</span>
+                        </a>
+                    </div>
+
+                    <!-- Confirmed Cases Button -->
+                    <div class="col-xl-3 col-md-6 mb-2">
+                        <a href="#" class="btn btn-outline-dark" role="button" onclick="change('FL')">
+                            <span class="text">FL</span>
+                        </a>
+                    </div>
+
+                    <!-- Death Cases Button -->
+                    <div class="col-xl-3 col-md-6 mb-2">
+                        <a href="#" class="btn btn-outline-dark" role="button" onclick="change('NY')">
+                            <span class="text">NY</span>
+                        </a>
+                    </div>
 
 
                     <!-- Area Chart -->
@@ -213,10 +240,6 @@
 
                         <!-- START GRAPH SECTION -->
                         <div id="graph">
-                            <button id="CA" onclick="change('CA')">CA</button>
-                            <button id="TX" onclick="change('TX')">TX</button>
-                            <button id="FL" onclick="change('FL')">FL</button>
-                            <button id="NY" onclick="change('NY')">NY</button>
                         </div>
                         <!-- END GRAPH SECTION -->
 
