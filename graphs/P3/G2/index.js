@@ -97,7 +97,9 @@ const render1 = data => {
         })
         .attr('class', 'casesLabels');
 
-    var radius = 200;
+    var radius = height / 2.2;
+
+    console.log(radius)
 
     var arr = [];
 
@@ -238,7 +240,7 @@ const render2 = data => {
         })
         .attr('class', 'casesLabel');
 
-    var radius = 200;
+    var radius = height / 2.2;
     var arr = [];
 
     data.forEach((d) => {
