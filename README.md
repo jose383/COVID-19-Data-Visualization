@@ -1,4 +1,4 @@
-# COVID-19 Data Visualization
+# COVID-19-Data-Visualization
 
 A web application for visualizing COVID-19 data.
 
