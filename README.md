@@ -3,7 +3,7 @@
 A web application for visualizing COVID-19 data.
 
 ### Go to the Website
-https://jose383.github.io/covid-19/
+https://jose383.github.io/COVID-19-Data-Visualization/
 
 ## Description
 
